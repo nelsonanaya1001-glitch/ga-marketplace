@@ -61,8 +61,8 @@
   .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--line-soft); color:var(--muted-dark); font-size:0.95rem; }
   .mobile-menu.open{ display:flex; }
 
-  /* HERO — bento */
-  .hero{ position:relative; padding-block:60px 70px; overflow:hidden; }
+  /* HERO */
+  .hero{ position:relative; padding-block:80px 90px; overflow:hidden; }
   .hero::before{
     content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
     background-image:
@@ -71,30 +71,13 @@
     background-size: 64px 64px;
     mask-image: radial-gradient(circle at 78% 8%, rgba(0,0,0,0.9), transparent 60%);
   }
-  .hero-top, .bento{ position:relative; z-index:1; }
-  .hero-top{ max-width:640px; margin-bottom:34px; }
+  .hero-top{ position:relative; z-index:1; max-width:680px; }
   .hero-badge{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border:1px solid var(--line); border-radius:20px; margin-bottom:20px; }
   .hero-badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--yellow); }
-  .hero-h1{ font-size:clamp(2.5rem, 5.4vw, 4rem); line-height:1; font-weight:900; color:var(--text-dark); }
+  .hero-h1{ font-size:clamp(2.6rem, 5.6vw, 4.3rem); line-height:1; font-weight:900; color:var(--text-dark); }
   .hero-h1 em{ font-style:normal; color:var(--blue-bright); }
-  .hero-sub{ margin-top:18px; font-size:1.02rem; line-height:1.6; color:var(--muted-dark); max-width:500px; }
-  .hero-ctas{ display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
-
-  .bento{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap:14px; }
-  .tile{ background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:24px; position:relative; overflow:hidden; }
-  .tile-stat{ grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:center; }
-  .tile-stat .num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:2.6rem; color:var(--yellow); line-height:1; }
-  .tile-stat .lbl{ margin-top:8px; font-size:0.85rem; color:var(--muted-dark); }
-  .tile-cats{ grid-column:2/4; grid-row:1; }
-  .tile-cats .lbl{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--faint-dark); margin-bottom:14px; }
-  .cat-chips{ display:flex; flex-wrap:wrap; gap:20px; }
-  .cat-chips span{ font-size:0.86rem; font-weight:600; color:var(--text-dark); padding-left:14px; border-left:2px solid var(--blue-bright); }
-  .tile-quote{ grid-column:1/3; grid-row:2; display:flex; flex-direction:column; justify-content:center; }
-  .tile-quote p{ font-size:0.98rem; line-height:1.55; color:var(--text-dark); }
-  .tile-quote .who{ margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted-dark); }
-  .tile-rep{ grid-column:3; grid-row:2; background:var(--blue); display:flex; flex-direction:column; justify-content:center; }
-  .tile-rep .lbl{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px; }
-  .tile-rep .big{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.25rem; color:#fff; line-height:1.25; }
+  .hero-sub{ margin-top:18px; font-size:1.05rem; line-height:1.6; color:var(--muted-dark); max-width:540px; }
+  .hero-ctas{ display:flex; gap:14px; margin-top:28px; flex-wrap:wrap; }
 
   /* SECTIONS */
   section{ padding-block:80px; }
@@ -115,11 +98,11 @@
   .cat-row .accent{ display:inline-block; width:26px; height:3px; margin-bottom:14px; }
   .cat-row .accent.c-blue{ background:var(--blue-bright); }
   .cat-row .accent.c-yellow{ background:var(--yellow); }
-  .cat-row h3{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.7rem; color:var(--text-dark); }
-  .cat-row .cat-meta{ margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--yellow); }
-  .cat-row .cat-desc{ font-size:0.95rem; line-height:1.6; color:var(--muted-dark); max-width:480px; }
-  .cat-row .cat-subs{ margin-top:14px; font-size:0.82rem; color:var(--faint-dark); }
-  .cat-row .cat-subs span{ color:var(--muted-dark); }
+  .cat-row h3{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.7rem; color:var(--text-light); }
+  .cat-row .cat-meta{ margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--blue); }
+  .cat-row .cat-desc{ font-size:0.95rem; line-height:1.6; color:var(--muted-light); max-width:480px; }
+  .cat-row .cat-subs{ margin-top:14px; font-size:0.82rem; color:var(--faint-light); }
+  .cat-row .cat-subs span{ color:var(--muted-light); }
   .cat-row .cat-link{ margin-top:16px; display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--blue-bright); background:none; border:none; padding:0; }
   .cat-row-btn{ display:block; width:100%; text-align:left; background:none; border:none; padding:0; cursor:pointer; }
   .cat-row-btn:hover h3{ color:var(--blue-bright); }
@@ -197,8 +180,6 @@
   @media (max-width:980px){
     .navlinks{ display:none; }
     .burger{ display:flex; }
-    .bento{ grid-template-columns:1fr; grid-template-rows:auto; }
-    .tile-stat, .tile-cats, .tile-quote, .tile-rep{ grid-column:1; grid-row:auto; }
     .cat-row{ grid-template-columns:1fr; gap:14px; }
     .why-row{ grid-template-columns:1fr; gap:28px; }
     .why-item{ border-left:none !important; padding:0; }
@@ -248,33 +229,9 @@
     <div class="hero-top">
       <div class="hero-badge"><span class="dot"></span><span class="eyebrow">Trade Accounts Only · Verified Suppliers</span></div>
       <h1 class="hero-h1 display">Source smarter.<br>Stock <em>faster.</em></h1>
-      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, and health &amp; wellness — real inventory, documented sourcing, one account rep.</p>
+      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, and health &amp; wellness.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#categories">Browse Categories</a>
-        <a class="btn btn-ghost-dark" href="#apply">Apply for Trade Account</a>
-      </div>
-    </div>
-
-    <div class="bento">
-      <div class="tile tile-stat">
-        <div class="num mono">1,200+</div>
-        <div class="lbl">Verified suppliers on the network</div>
-      </div>
-      <div class="tile tile-cats">
-        <div class="lbl">Sourcing Categories</div>
-        <div class="cat-chips">
-          <span>Kitchen Appliances</span>
-          <span>Household Electronics</span>
-          <span>Health &amp; Wellness</span>
-        </div>
-      </div>
-      <div class="tile tile-quote">
-        <p>&ldquo;We stopped chasing three different suppliers for reorders. One purchase order and a rep who actually answers.&rdquo;</p>
-        <div class="who">— TRADE ACCOUNT, ONLINE RETAILER</div>
-      </div>
-      <div class="tile tile-rep">
-        <div class="lbl">Named Account Rep</div>
-        <div class="big">One line. One inbox. No ticket queue.</div>
       </div>
     </div>
   </div>
