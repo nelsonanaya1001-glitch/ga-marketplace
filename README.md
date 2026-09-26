@@ -1,3 +1,3 @@
 # GA Marketplace
 
-Landing page for GA Marketplace — a freight brokerage marketplace connecting shippers with vetted carriers nationwide.
+Wholesale sourcing marketplace landing page — connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across six product categories.
