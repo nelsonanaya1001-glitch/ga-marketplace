@@ -7,13 +7,12 @@
     --ink:#07080b;
     --surface:#0d1017;
     --surface-2:#12151d;
-    --line: rgba(245,246,248,0.12);
+    --line: rgba(245,246,248,0.14);
     --line-soft: rgba(245,246,248,0.08);
     --blue:#1450e0;
     --blue-deep:#08174d;
     --blue-bright:#4c78ff;
     --yellow:#f2b705;
-    --yellow-deep:#b98a00;
     --paper:#ffffff;
     --paper-soft:#f4f6fa;
     --text-dark:#f5f6f8;
@@ -34,14 +33,14 @@
   .display{ font-family:'Archivo', 'Arial Black', sans-serif; letter-spacing:-0.01em; }
   .mono{ font-family:'JetBrains Mono', monospace; font-variant-numeric: tabular-nums; }
   .eyebrow{ font-family:'JetBrains Mono', monospace; font-size:0.7rem; letter-spacing:0.16em; text-transform:uppercase; color:var(--yellow); }
-  .wrap{ max-width:1240px; margin:0 auto; padding-inline:24px; }
+  .wrap{ max-width:1200px; margin:0 auto; padding-inline:24px; }
 
   /* NAV */
   .topbar{ position:sticky; top:0; z-index:50; background:rgba(7,8,11,0.9); backdrop-filter:blur(10px); border-bottom:1px solid var(--line); padding-block:16px; }
   .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; gap:20px; }
   .brand{ display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-weight:800; font-size:1.1rem; white-space:nowrap; }
-  .brand .mark{ width:32px; height:32px; flex:none; border-radius:7px; background: linear-gradient(135deg, var(--blue-bright), var(--blue-deep)); position:relative; }
-  .brand .mark::before{ content:''; position:absolute; left:8px; top:8px; width:16px; height:16px; border-radius:3px; background:var(--yellow); }
+  .brand .mark{ width:30px; height:30px; flex:none; border-radius:4px; background: var(--blue); position:relative; }
+  .brand .mark::before{ content:''; position:absolute; left:7px; top:7px; width:16px; height:16px; background:var(--yellow); }
   .brand .ga{ color:var(--text-dark); }
   .brand .mkt{ color:var(--yellow); }
   .navlinks{ display:flex; align-items:center; gap:26px; font-size:0.86rem; font-weight:500; }
@@ -49,113 +48,111 @@
   .navlinks a:hover{ color:var(--text-dark); }
   .nav-right{ display:flex; align-items:center; gap:14px; }
   .nav-phone{ font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--text-dark); white-space:nowrap; display:flex; align-items:center; gap:7px; }
-  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 20px; border-radius:5px; font-weight:700; font-size:0.85rem; border:1.5px solid transparent; white-space:nowrap; transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease; }
+  .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 20px; border-radius:3px; font-weight:700; font-size:0.85rem; border:1.5px solid transparent; white-space:nowrap; transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease; }
   .btn-primary{ background:var(--blue); color:#fff; }
   .btn-primary:hover{ background:var(--blue-bright); transform:translateY(-1px); box-shadow:0 8px 20px rgba(20,80,224,0.35); }
   .btn-gold{ background:var(--yellow); color:var(--ink); }
   .btn-gold:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(242,183,5,0.28); }
   .btn-ghost-dark{ border-color:var(--line); color:var(--text-dark); background:transparent; }
   .btn-ghost-dark:hover{ border-color:var(--blue-bright); color:var(--blue-bright); }
-  .btn-ghost-light{ border-color:rgba(11,13,18,0.16); color:var(--text-light); background:transparent; }
-  .btn-ghost-light:hover{ border-color:var(--blue); color:var(--blue); }
-  .burger{ display:none; width:38px; height:38px; border-radius:5px; border:1px solid var(--line); background:transparent; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+  .burger{ display:none; width:38px; height:38px; border-radius:3px; border:1px solid var(--line); background:transparent; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
   .burger span{ display:block; width:18px; height:2px; background:var(--text-dark); }
   .mobile-menu{ display:none; flex-direction:column; padding:6px 24px 18px; border-bottom:1px solid var(--line); background:var(--ink); }
   .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--line-soft); color:var(--muted-dark); font-size:0.95rem; }
   .mobile-menu.open{ display:flex; }
 
-  /* HERO — bento grid */
-  .hero{ padding-block:60px 70px; background: radial-gradient(circle at 82% -10%, rgba(20,80,224,0.28), transparent 55%); }
+  /* HERO — bento */
+  .hero{ position:relative; padding-block:60px 70px; overflow:hidden; }
+  .hero::before{
+    content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
+    background-image:
+      linear-gradient(rgba(76,120,255,0.07) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(76,120,255,0.07) 1px, transparent 1px);
+    background-size: 64px 64px;
+    mask-image: radial-gradient(circle at 78% 8%, rgba(0,0,0,0.9), transparent 60%);
+  }
+  .hero-top, .bento{ position:relative; z-index:1; }
   .hero-top{ max-width:640px; margin-bottom:34px; }
   .hero-badge{ display:inline-flex; align-items:center; gap:8px; padding:6px 12px; border:1px solid var(--line); border-radius:20px; margin-bottom:20px; }
   .hero-badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--yellow); }
-  .hero-h1{ font-size:clamp(2.4rem, 5vw, 3.7rem); line-height:1.02; font-weight:900; color:var(--text-dark); }
+  .hero-h1{ font-size:clamp(2.5rem, 5.4vw, 4rem); line-height:1; font-weight:900; color:var(--text-dark); }
   .hero-h1 em{ font-style:normal; color:var(--blue-bright); }
-  .hero-sub{ margin-top:18px; font-size:1.02rem; line-height:1.6; color:var(--muted-dark); max-width:520px; }
+  .hero-sub{ margin-top:18px; font-size:1.02rem; line-height:1.6; color:var(--muted-dark); max-width:500px; }
   .hero-ctas{ display:flex; gap:14px; margin-top:26px; flex-wrap:wrap; }
 
-  .bento{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap:16px; }
-  .tile{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:24px; position:relative; overflow:hidden; }
+  .bento{ display:grid; grid-template-columns: 1.3fr 1fr 1fr; grid-template-rows: auto auto; gap:14px; }
+  .tile{ background:var(--surface); border:1px solid var(--line); border-radius:6px; padding:24px; position:relative; overflow:hidden; }
   .tile-stat{ grid-column:1; grid-row:1; display:flex; flex-direction:column; justify-content:center; }
   .tile-stat .num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:2.6rem; color:var(--yellow); line-height:1; }
   .tile-stat .lbl{ margin-top:8px; font-size:0.85rem; color:var(--muted-dark); }
   .tile-cats{ grid-column:2/4; grid-row:1; }
   .tile-cats .lbl{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--faint-dark); margin-bottom:14px; }
-  .cat-chips{ display:flex; flex-wrap:wrap; gap:8px; }
-  .cat-chip{ font-size:0.78rem; font-weight:600; padding:7px 12px; border-radius:20px; background:var(--surface-2); border:1px solid var(--line); color:var(--text-dark); }
+  .cat-chips{ display:flex; flex-wrap:wrap; gap:20px; }
+  .cat-chips span{ font-size:0.86rem; font-weight:600; color:var(--text-dark); padding-left:14px; border-left:2px solid var(--blue-bright); }
   .tile-quote{ grid-column:1/3; grid-row:2; display:flex; flex-direction:column; justify-content:center; }
   .tile-quote p{ font-size:0.98rem; line-height:1.55; color:var(--text-dark); }
   .tile-quote .who{ margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:0.72rem; color:var(--muted-dark); }
-  .tile-rep{ grid-column:3; grid-row:2; background:linear-gradient(150deg, var(--blue-deep), var(--blue) 130%); display:flex; flex-direction:column; justify-content:center; }
+  .tile-rep{ grid-column:3; grid-row:2; background:var(--blue); display:flex; flex-direction:column; justify-content:center; }
   .tile-rep .lbl{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:rgba(255,255,255,0.7); margin-bottom:8px; }
-  .tile-rep .big{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.3rem; color:#fff; line-height:1.2; }
+  .tile-rep .big{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.25rem; color:#fff; line-height:1.25; }
 
   /* SECTIONS */
   section{ padding-block:80px; }
   .section-light{ background:var(--paper); color:var(--text-light); }
   .section-soft{ background:var(--paper-soft); color:var(--text-light); }
-  .sec-head{ max-width:640px; margin-bottom:48px; }
+  .sec-head{ max-width:620px; margin-bottom:44px; }
   .sec-head .eyebrow{ display:block; margin-bottom:12px; }
   .section-light .eyebrow, .section-soft .eyebrow{ color:var(--blue); }
-  .sec-head h2{ font-size:clamp(1.8rem, 3.2vw, 2.4rem); font-weight:800; }
+  .sec-head h2{ font-size:clamp(1.8rem, 3.2vw, 2.5rem); font-weight:800; }
   .sec-head p{ margin-top:14px; font-size:1rem; line-height:1.6; }
   .section-light .sec-head p, .section-soft .sec-head p{ color:var(--muted-light); }
   .section-dark .sec-head p{ color:var(--muted-dark); }
 
-  /* CATEGORY GRID */
-  .cat-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:18px; }
-  .cat-card{ text-align:left; background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:22px; cursor:pointer; transition:border-color .15s ease, transform .15s ease; }
-  .cat-card:hover{ border-color:var(--blue-bright); transform:translateY(-3px); }
-  .cat-card .cat-icon{ width:44px; height:44px; border-radius:9px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
-  .cat-card .cat-icon svg{ width:24px; height:24px; }
-  .cat-card h4{ font-size:1.05rem; font-weight:700; color:var(--text-dark); }
-  .cat-card .cat-meta{ margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:0.74rem; color:var(--yellow); }
-  .cat-card .cat-sub{ margin-top:12px; font-size:0.86rem; color:var(--muted-dark); line-height:1.5; }
-  .cat-card .cat-link{ margin-top:14px; font-size:0.74rem; letter-spacing:0.05em; text-transform:uppercase; color:var(--faint-dark); }
+  /* CATEGORY ROWS — editorial, not cards */
+  .cat-rows{ display:flex; flex-direction:column; }
+  .cat-row{ display:grid; grid-template-columns: 1.1fr 1.5fr; gap:40px; padding-block:34px; border-top:1px solid var(--line); align-items:start; }
+  .cat-row:first-child{ border-top:1px solid var(--line); }
+  .cat-row .accent{ display:inline-block; width:26px; height:3px; margin-bottom:14px; }
+  .cat-row .accent.c-blue{ background:var(--blue-bright); }
+  .cat-row .accent.c-yellow{ background:var(--yellow); }
+  .cat-row h3{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.7rem; color:var(--text-dark); }
+  .cat-row .cat-meta{ margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--yellow); }
+  .cat-row .cat-desc{ font-size:0.95rem; line-height:1.6; color:var(--muted-dark); max-width:480px; }
+  .cat-row .cat-subs{ margin-top:14px; font-size:0.82rem; color:var(--faint-dark); }
+  .cat-row .cat-subs span{ color:var(--muted-dark); }
+  .cat-row .cat-link{ margin-top:16px; display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--blue-bright); background:none; border:none; padding:0; }
+  .cat-row-btn{ display:block; width:100%; text-align:left; background:none; border:none; padding:0; cursor:pointer; }
+  .cat-row-btn:hover h3{ color:var(--blue-bright); }
 
   /* MODAL */
   .modal-backdrop{ position:fixed; inset:0; background:rgba(7,8,11,0.72); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:100; padding:24px; }
   .modal-backdrop.open{ display:flex; }
-  .modal{ background:var(--surface); border:1px solid var(--line); border-radius:12px; max-width:480px; width:100%; padding:30px; position:relative; max-height:86vh; overflow-y:auto; }
-  .modal-close{ position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--text-dark); }
-  .modal .m-icon{ width:48px; height:48px; border-radius:10px; background:var(--surface-2); display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
-  .modal .m-icon svg{ width:26px; height:26px; }
-  .modal h3{ font-size:1.4rem; font-weight:800; color:var(--text-dark); }
+  .modal{ background:var(--surface); border:1px solid var(--line); border-radius:6px; max-width:460px; width:100%; padding:30px; position:relative; max-height:86vh; overflow-y:auto; }
+  .modal-close{ position:absolute; top:16px; right:16px; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--text-dark); }
+  .modal .accent{ display:inline-block; width:26px; height:3px; margin-bottom:16px; background:var(--yellow); }
+  .modal h3{ font-size:1.5rem; font-weight:800; color:var(--text-dark); }
   .modal .m-meta{ margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--yellow); }
   .modal .m-desc{ margin-top:14px; color:var(--muted-dark); font-size:0.92rem; line-height:1.55; }
-  .modal .m-subs{ margin-top:18px; display:flex; flex-wrap:wrap; gap:8px; }
-  .modal .m-sub{ font-size:0.76rem; padding:6px 11px; border-radius:16px; background:var(--surface-2); border:1px solid var(--line); color:var(--muted-dark); }
-  .modal .m-tiers{ margin-top:20px; border-top:1px solid var(--line); padding-top:16px; }
-  .modal .m-tier-row{ display:flex; justify-content:space-between; font-size:0.84rem; padding-block:6px; color:var(--muted-dark); }
-  .modal .m-tier-row span:last-child{ font-family:'JetBrains Mono',monospace; color:var(--text-dark); }
+  .modal .m-subs{ margin-top:20px; border-top:1px solid var(--line); padding-top:16px; }
+  .modal .m-subs .m-subs-lbl{ font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--faint-dark); margin-bottom:10px; }
+  .modal .m-sub-list{ font-size:0.88rem; color:var(--text-dark); line-height:1.7; }
 
-  /* VALUE PROPS (light) */
-  .value-grid{ display:grid; grid-template-columns:repeat(4,1fr); gap:20px; }
-  .value-card{ padding:26px 22px; border-radius:12px; background:var(--paper); border:1px solid rgba(11,13,18,0.09); }
-  .value-card .v-icon{ width:42px; height:42px; border-radius:9px; background:rgba(20,80,224,0.08); display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
-  .value-card .v-icon svg{ width:22px; height:22px; }
-  .value-card h4{ font-size:1rem; font-weight:700; color:var(--text-light); }
-  .value-card p{ margin-top:8px; font-size:0.86rem; line-height:1.5; color:var(--muted-light); }
+  /* WHY GA MARKETPLACE — plain three-up, no card boxes */
+  .why-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
+  .why-item{ padding:0 28px; }
+  .why-item + .why-item{ border-left:1px solid rgba(11,13,18,0.12); }
+  .why-item svg{ width:26px; height:26px; }
+  .why-item h4{ margin-top:16px; font-size:1.02rem; font-weight:700; color:var(--text-light); }
+  .why-item p{ margin-top:10px; font-size:0.88rem; line-height:1.55; color:var(--muted-light); }
 
-  /* HOW IT WORKS (dark, numbered — real sequence) */
+  /* HOW IT WORKS */
   .steps-row{ display:flex; gap:0; align-items:stretch; }
-  .step-item{ flex:1; padding:26px 22px; border-top:2px solid var(--line); position:relative; }
+  .step-item{ flex:1; padding:26px 24px; border-top:2px solid var(--blue-bright); }
+  .step-item:nth-child(2){ border-top-color: var(--yellow); }
   .step-item + .step-item{ border-left:1px solid var(--line-soft); }
-  .step-item .step-num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:1.8rem; color:var(--blue-bright); }
+  .step-item .step-num{ font-family:'Archivo',sans-serif; font-weight:900; font-size:1.7rem; color:var(--faint-dark); }
   .step-item h4{ margin-top:10px; font-size:1rem; font-weight:700; color:var(--text-dark); }
   .step-item p{ margin-top:8px; font-size:0.85rem; color:var(--muted-dark); line-height:1.5; }
-
-  /* PRICING TIERS */
-  .tier-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
-  .tier-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:28px; }
-  .tier-card.featured{ border-color:var(--yellow); background:linear-gradient(160deg, var(--surface), var(--surface-2)); }
-  .tier-name{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.1rem; color:var(--text-dark); }
-  .tier-vol{ font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--yellow); margin-top:6px; }
-  .tier-disc{ margin-top:18px; font-family:'Archivo',sans-serif; font-weight:900; font-size:2.1rem; color:var(--text-dark); }
-  .tier-disc span{ font-size:0.95rem; font-weight:600; color:var(--muted-dark); }
-  .tier-list{ margin-top:18px; display:flex; flex-direction:column; gap:10px; }
-  .tier-list div{ font-size:0.85rem; color:var(--muted-dark); display:flex; gap:8px; align-items:flex-start; }
-  .tier-list div::before{ content:'—'; color:var(--blue-bright); flex:none; }
 
   /* FAQ */
   .faq-list{ display:flex; flex-direction:column; }
@@ -164,10 +161,10 @@
   .faq-q .plus{ flex:none; font-size:1.3rem; color:var(--blue); transition:transform .15s ease; }
   .faq-item.open .faq-q .plus{ transform:rotate(45deg); }
   .faq-a{ max-height:0; overflow:hidden; transition:max-height .2s ease; }
-  .faq-a p{ padding-bottom:20px; font-size:0.92rem; line-height:1.6; color:var(--muted-light); max-width:640px; }
+  .faq-a p{ padding-bottom:20px; font-size:0.92rem; line-height:1.6; color:var(--muted-light); max-width:620px; }
 
   /* CTA / CONTACT */
-  .cta-section{ background: linear-gradient(150deg, var(--blue-deep) 0%, var(--ink) 60%); border-top:1px solid var(--line); }
+  .cta-section{ background: var(--surface); border-top:1px solid var(--line); }
   .cta-grid{ display:grid; grid-template-columns:1fr 1fr; gap:48px; align-items:start; }
   .cta-left h2{ font-size:clamp(1.8rem,3vw,2.3rem); font-weight:800; color:var(--text-dark); }
   .cta-left p{ margin-top:16px; color:var(--muted-dark); line-height:1.6; max-width:420px; }
@@ -175,12 +172,12 @@
   .cta-contacts a{ display:flex; align-items:center; gap:10px; font-family:'JetBrains Mono',monospace; color:var(--text-dark); font-size:0.92rem; }
   .cta-note{ margin-top:22px; font-size:0.78rem; color:var(--faint-dark); max-width:400px; line-height:1.5; }
 
-  .form-card{ background:var(--surface); border:1px solid var(--line); border-radius:12px; padding:28px; }
+  .form-card{ background:var(--surface-2); border:1px solid var(--line); border-radius:6px; padding:28px; }
   .form-row{ display:grid; grid-template-columns:1fr 1fr; gap:14px; }
   .field{ display:flex; flex-direction:column; gap:6px; margin-bottom:14px; }
   .field.full{ grid-column:1/-1; }
   .field label{ font-size:0.7rem; letter-spacing:0.06em; text-transform:uppercase; color:var(--faint-dark); }
-  .field input, .field select, .field textarea{ background:var(--surface-2); border:1px solid var(--line); border-radius:5px; padding:11px 13px; color:var(--text-dark); font-family:'Work Sans',sans-serif; font-size:0.92rem; outline:none; resize:none; }
+  .field input, .field select, .field textarea{ background:var(--surface); border:1px solid var(--line); border-radius:3px; padding:11px 13px; color:var(--text-dark); font-family:'Work Sans',sans-serif; font-size:0.92rem; outline:none; resize:none; }
   .field input:focus, .field select:focus, .field textarea:focus{ border-color:var(--blue-bright); }
   .form-submit{ width:100%; margin-top:6px; }
   .form-success{ display:none; text-align:center; padding:20px 0; color:var(--text-dark); }
@@ -202,17 +199,15 @@
     .burger{ display:flex; }
     .bento{ grid-template-columns:1fr; grid-template-rows:auto; }
     .tile-stat, .tile-cats, .tile-quote, .tile-rep{ grid-column:1; grid-row:auto; }
-    .cat-grid{ grid-template-columns:repeat(2,1fr); }
-    .value-grid{ grid-template-columns:repeat(2,1fr); }
+    .cat-row{ grid-template-columns:1fr; gap:14px; }
+    .why-row{ grid-template-columns:1fr; gap:28px; }
+    .why-item{ border-left:none !important; padding:0; }
     .steps-row{ flex-wrap:wrap; }
     .step-item{ flex:1 1 45%; border-left:none !important; }
-    .tier-grid{ grid-template-columns:1fr; }
     .cta-grid{ grid-template-columns:1fr; }
     .foot-grid{ grid-template-columns:1fr 1fr; }
   }
   @media (max-width:620px){
-    .cat-grid{ grid-template-columns:1fr; }
-    .value-grid{ grid-template-columns:1fr; }
     .form-row{ grid-template-columns:1fr; }
     .step-item{ flex:1 1 100%; }
     .foot-grid{ grid-template-columns:1fr; }
@@ -227,7 +222,6 @@
     <nav class="navlinks">
       <a href="#categories">Categories</a>
       <a href="#how">How It Works</a>
-      <a href="#pricing">Wholesale Pricing</a>
       <a href="#faq">FAQ</a>
     </nav>
     <div class="nav-right">
@@ -242,7 +236,6 @@
   <div class="mobile-menu" id="mobileMenu">
     <a href="#categories">Categories</a>
     <a href="#how">How It Works</a>
-    <a href="#pricing">Wholesale Pricing</a>
     <a href="#faq">FAQ</a>
     <a href="tel:+17866223740">+1 (786) 622-3740</a>
   </div>
@@ -255,7 +248,7 @@
     <div class="hero-top">
       <div class="hero-badge"><span class="dot"></span><span class="eyebrow">Trade Accounts Only · Verified Suppliers</span></div>
       <h1 class="hero-h1 display">Source smarter.<br>Stock <em>faster.</em></h1>
-      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across six high-demand categories — tier pricing, real inventory, one account rep.</p>
+      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, and health &amp; wellness — real inventory, documented sourcing, one account rep.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#categories">Browse Categories</a>
         <a class="btn btn-ghost-dark" href="#apply">Apply for Trade Account</a>
@@ -268,18 +261,15 @@
         <div class="lbl">Verified suppliers on the network</div>
       </div>
       <div class="tile tile-cats">
-        <div class="lbl">Six Sourcing Categories</div>
+        <div class="lbl">Sourcing Categories</div>
         <div class="cat-chips">
-          <span class="cat-chip">Apparel &amp; Footwear</span>
-          <span class="cat-chip">Home &amp; Living</span>
-          <span class="cat-chip">Pet Supplies</span>
-          <span class="cat-chip">Tools &amp; Hardware</span>
-          <span class="cat-chip">Automotive &amp; Industrial</span>
-          <span class="cat-chip">Office &amp; Business Supplies</span>
+          <span>Kitchen Appliances</span>
+          <span>Household Electronics</span>
+          <span>Health &amp; Wellness</span>
         </div>
       </div>
       <div class="tile tile-quote">
-        <p>&ldquo;We stopped chasing three different suppliers for reorders. One purchase order, tier pricing, and a rep who actually answers.&rdquo;</p>
+        <p>&ldquo;We stopped chasing three different suppliers for reorders. One purchase order and a rep who actually answers.&rdquo;</p>
         <div class="who">— TRADE ACCOUNT, ONLINE RETAILER</div>
       </div>
       <div class="tile tile-rep">
@@ -294,10 +284,10 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Our Product Categories</span>
-      <h2>Six lines, one purchase order.</h2>
-      <p>Every category is sourced through vetted, authorized suppliers — click a card for subcategories, minimum order quantities, and tier pricing.</p>
+      <h2>Kitchen, electronics, wellness. One account.</h2>
+      <p>Every category is sourced through vetted, authorized suppliers. Select a line for subcategories and typical order volumes.</p>
     </div>
-    <div class="cat-grid" id="catGrid"></div>
+    <div class="cat-rows" id="catRows"></div>
   </div>
 </section>
 
@@ -305,7 +295,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">How Sourcing Works</span>
-      <h2>From application to reorder, in four steps.</h2>
+      <h2>From application to reorder, in three steps.</h2>
     </div>
   </div>
   <div class="wrap" style="padding-inline:24px;">
@@ -318,15 +308,10 @@
       <div class="step-item">
         <div class="step-num mono">02</div>
         <h4>Browse Verified Suppliers</h4>
-        <p>Access published tier pricing across all six categories with real, documented inventory.</p>
+        <p>Real, documented inventory across kitchen appliances, household electronics, and health &amp; wellness.</p>
       </div>
       <div class="step-item">
         <div class="step-num mono">03</div>
-        <h4>Order at Tier Pricing</h4>
-        <p>Pricing steps down automatically as your order volume grows — from single pallets to container loads.</p>
-      </div>
-      <div class="step-item">
-        <div class="step-num mono">04</div>
         <h4>Ship &amp; Reorder</h4>
         <p>Your account rep handles fulfillment and reorders, so your shelves and listings stay stocked.</p>
       </div>
@@ -340,68 +325,21 @@
       <span class="eyebrow">Why GA Marketplace</span>
       <h2>Built for businesses that buy on a schedule.</h2>
     </div>
-    <div class="value-grid">
-      <div class="value-card">
-        <div class="v-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg></div>
+    <div class="why-row">
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
         <h4>Verified Suppliers</h4>
         <p>Every supplier on the network is vetted for authenticity and documentation before their first listing goes live.</p>
       </div>
-      <div class="value-card">
-        <div class="v-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 17l6-6 4 4 8-8"/><path d="M15 6h6v6"/></svg></div>
-        <h4>Tier Pricing</h4>
-        <p>Published volume tiers that step down automatically — no negotiating a new price on every reorder.</p>
-      </div>
-      <div class="value-card">
-        <div class="v-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg></div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         <h4>A Named Account Rep</h4>
         <p>One person who knows your reorder cycle and seasonal peaks — a direct line, not a shared support inbox.</p>
       </div>
-      <div class="value-card">
-        <div class="v-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="13" height="10" rx="1"/><path d="M16 11h4l1 3v4h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg></div>
+      <div class="why-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="13" height="10" rx="1"/><path d="M16 11h4l1 3v4h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
         <h4>Nationwide Fulfillment</h4>
         <p>Orders route to the nearest partner warehouse and dispatch within 24 hours of confirmation.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section id="pricing">
-  <div class="wrap">
-    <div class="sec-head">
-      <span class="eyebrow">Wholesale Pricing</span>
-      <h2>Pricing that scales with your order.</h2>
-      <p>Every trade account starts here — exact tiers vary by category and are confirmed with your account rep.</p>
-    </div>
-    <div class="tier-grid">
-      <div class="tier-card">
-        <div class="tier-name">Starter</div>
-        <div class="tier-vol mono">50–199 UNITS</div>
-        <div class="tier-disc">List <span>price</span></div>
-        <div class="tier-list">
-          <div>Entry-level trade pricing</div>
-          <div>Standard 24-hour dispatch</div>
-          <div>Email support</div>
-        </div>
-      </div>
-      <div class="tier-card featured">
-        <div class="tier-name">Growth</div>
-        <div class="tier-vol mono">200–999 UNITS</div>
-        <div class="tier-disc">–8<span>% off list</span></div>
-        <div class="tier-list">
-          <div>Automatic tier pricing</div>
-          <div>Named account rep</div>
-          <div>Priority dispatch</div>
-        </div>
-      </div>
-      <div class="tier-card">
-        <div class="tier-name">Enterprise</div>
-        <div class="tier-vol mono">1,000+ UNITS / PALLET</div>
-        <div class="tier-disc">Custom</div>
-        <div class="tier-list">
-          <div>Contract &amp; pallet pricing</div>
-          <div>Dedicated fulfillment lane</div>
-          <div>Drop-ship &amp; integration support</div>
-        </div>
       </div>
     </div>
   </div>
@@ -445,12 +383,9 @@
             <div class="field"><label for="fPhone">Phone</label><input id="fPhone" type="tel"></div>
             <div class="field full"><label for="fCategory">Primary Category</label>
               <select id="fCategory">
-                <option>Apparel &amp; Footwear</option>
-                <option>Home &amp; Living</option>
-                <option>Pet Supplies</option>
-                <option>Tools &amp; Hardware</option>
-                <option>Automotive &amp; Industrial</option>
-                <option>Office &amp; Business Supplies</option>
+                <option>Kitchen Appliances</option>
+                <option>Household Electronics</option>
+                <option>Health &amp; Wellness</option>
               </select>
             </div>
             <div class="field full"><label for="fNotes">What are you sourcing?</label><textarea id="fNotes" rows="3"></textarea></div>
@@ -471,20 +406,19 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top"><span class="mark"></span><span class="ga">GA</span>&nbsp;<span class="mkt">MARKETPLACE</span></a>
-        <p>Wholesale sourcing and supplier connections across six categories — trade accounts only, not a consumer storefront.</p>
+        <p>Wholesale sourcing and supplier connections across three categories — trade accounts only, not a consumer storefront.</p>
       </div>
       <div class="foot-col">
         <h5>Categories</h5>
-        <a href="#categories">Apparel &amp; Footwear</a>
-        <a href="#categories">Home &amp; Living</a>
-        <a href="#categories">Pet Supplies</a>
-        <a href="#categories">Tools &amp; Hardware</a>
+        <a href="#categories">Kitchen Appliances</a>
+        <a href="#categories">Household Electronics</a>
+        <a href="#categories">Health &amp; Wellness</a>
       </div>
       <div class="foot-col">
         <h5>Company</h5>
         <a href="#how">How It Works</a>
-        <a href="#pricing">Wholesale Pricing</a>
         <a href="#faq">FAQ</a>
+        <a href="#apply">Apply</a>
       </div>
       <div class="foot-col">
         <h5>Wholesale Desk</h5>
@@ -502,12 +436,14 @@
 <div class="modal-backdrop" id="modalBackdrop">
   <div class="modal">
     <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-    <div class="m-icon" id="modalIcon"></div>
+    <span class="accent"></span>
     <h3 id="modalTitle"></h3>
     <div class="m-meta mono" id="modalMeta"></div>
     <p class="m-desc" id="modalDesc"></p>
-    <div class="m-subs" id="modalSubs"></div>
-    <div class="m-tiers" id="modalTiers"></div>
+    <div class="m-subs">
+      <div class="m-subs-lbl">Subcategories</div>
+      <div class="m-sub-list" id="modalSubs"></div>
+    </div>
   </div>
 </div>
 
@@ -519,54 +455,34 @@
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
 
   var categories = [
-    { name:'Apparel & Footwear', moq:'MOQ 75 UNITS', icon:'<path d="M8 4l4 2 4-2 3 4-3 2v10H8V10L5 8z"/>',
-      desc:'Everyday and seasonal apparel plus footwear, sourced in bulk for boutiques, resellers, and online sellers.',
-      subs:['T-Shirts & Basics','Outerwear','Activewear','Footwear','Accessories','Seasonal Lines'],
-      tiers:[['50–199 units','List price'],['200–999 units','–8% off list'],['1,000+ / pallet','Custom quote']] },
-    { name:'Home & Living', moq:'MOQ 50 UNITS', icon:'<path d="M4 11l8-7 8 7"/><path d="M6 10v10h12V10"/><path d="M10 20v-6h4v6"/>',
-      desc:'Furniture, décor, and housewares sourced brand-direct and through authorized distribution for home goods retailers.',
-      subs:['Furniture','Home Décor','Bedding & Textiles','Kitchenware','Storage & Organization','Lighting'],
-      tiers:[['25–99 units','List price'],['100–499 units','–7% off list'],['500+ / pallet','Custom quote']] },
-    { name:'Pet Supplies', moq:'MOQ 100 UNITS', icon:'<circle cx="8" cy="8" r="1.6"/><circle cx="16" cy="8" r="1.6"/><circle cx="5.5" cy="12.5" r="1.6"/><circle cx="18.5" cy="12.5" r="1.6"/><path d="M12 13c-3 0-5.5 2-5.5 4.5S8.5 21 12 21s5.5-1 5.5-3.5S15 13 12 13z"/>',
-      desc:'Pet food, accessories, and grooming supplies sourced in bulk for pet stores, groomers, and ecommerce sellers.',
-      subs:['Pet Food & Treats','Toys & Enrichment','Grooming Supplies','Carriers & Travel','Beds & Furniture','Health & Wellness'],
-      tiers:[['100–299 units','List price'],['300–1,499 units','–9% off list'],['1,500+ / pallet','Custom quote']] },
-    { name:'Tools & Hardware', moq:'MOQ 60 UNITS', icon:'<path d="M14.5 7.5a3 3 0 1 0-4.24 4.24L4 18l2 2 6.26-6.26a3 3 0 0 0 4.24-4.24z"/><path d="M17 4l3 3-2 2-3-3z"/>',
-      desc:'Hand tools, power tool accessories, and hardware sourced through authorized distribution for trade suppliers and retailers.',
-      subs:['Hand Tools','Power Tool Accessories','Fasteners & Fixings','Workwear & PPE','Storage & Tool Boxes','Shop Equipment'],
-      tiers:[['60–249 units','List price'],['250–999 units','–8% off list'],['1,000+ / pallet','Custom quote']] },
-    { name:'Automotive & Industrial', moq:'MOQ 40 UNITS', icon:'<circle cx="7" cy="17" r="2"/><circle cx="17" cy="17" r="2"/><path d="M5 17H3v-4l2-5h11l3 5v4h-2"/><path d="M9 17h6"/>',
-      desc:'Aftermarket parts, accessories, and industrial supplies sourced for auto shops, resellers, and parts distributors.',
-      subs:['Aftermarket Parts','Car Care & Accessories','Fluids & Filters','Industrial Supplies','Safety Equipment','Fleet Accessories'],
-      tiers:[['40–149 units','List price'],['150–749 units','–7% off list'],['750+ / pallet','Custom quote']] },
-    { name:'Office & Business Supplies', moq:'MOQ 80 UNITS', icon:'<rect x="4" y="5" width="16" height="12" rx="1"/><path d="M4 9h16"/><path d="M9 13h6"/>',
-      desc:'Office essentials, packaging, and business supplies sourced in bulk for offices, shippers, and small businesses.',
-      subs:['Paper & Printing','Packaging & Shipping','Office Furniture','Break Room Supplies','Filing & Storage','Business Electronics'],
-      tiers:[['80–299 units','List price'],['300–1,499 units','–8% off list'],['1,500+ / pallet','Custom quote']] }
+    { name:'Kitchen Appliances', moq:'MOQ 40 UNITS', accent:'c-blue',
+      desc:'Small and countertop kitchen appliances sourced brand-direct and through authorized distribution for retailers and resellers.',
+      subs:['Countertop Appliances','Cookware & Bakeware','Food Prep & Storage','Coffee & Beverage','Kitchen Electronics','Replacement Parts'] },
+    { name:'Household Electronics', moq:'MOQ 30 UNITS', accent:'c-yellow',
+      desc:'Smart home devices, displays, and consumer electronics sourced in bulk for retailers, resellers, and online sellers.',
+      subs:['Smart Home Devices','TVs & Displays','Audio & Speakers','Chargers & Accessories','Security Devices','Small Electronics'] },
+    { name:'Health & Wellness', moq:'MOQ 50 UNITS', accent:'c-blue',
+      desc:'Vitamins, supplements, and wellness essentials sourced for pharmacies, gyms, health stores, and ecommerce sellers.',
+      subs:['Vitamins & Supplements','Fitness Equipment','Personal Care','Wellness Devices','First Aid','Nutrition'] }
   ];
 
-  var catGrid = document.getElementById('catGrid');
+  var catRows = document.getElementById('catRows');
   categories.forEach(function(c){
-    var card = document.createElement('button');
-    card.className = 'cat-card';
-    card.innerHTML =
-      '<div class="cat-icon"><svg viewBox="0 0 24 24" fill="none" stroke="#4c78ff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + c.icon + '</svg></div>' +
-      '<h4>' + c.name + '</h4>' +
-      '<div class="cat-meta">' + c.moq + '</div>' +
-      '<p class="cat-sub">' + c.desc + '</p>' +
-      '<div class="cat-link">View category →</div>';
-    card.addEventListener('click', function(){ openModal(c); });
-    catGrid.appendChild(card);
+    var row = document.createElement('div');
+    row.className = 'cat-row';
+    row.innerHTML =
+      '<div><button class="cat-row-btn"><span class="accent ' + c.accent + '"></span><h3>' + c.name + '</h3><div class="cat-meta">' + c.moq + '</div></button></div>' +
+      '<div><p class="cat-desc">' + c.desc + '</p><div class="cat-subs">' + c.subs.map(function(s){return '<span>'+s+'</span>';}).join(' · ') + '</div><button class="cat-link">View category →</button></div>';
+    row.querySelectorAll('.cat-row-btn, .cat-link').forEach(function(el){ el.addEventListener('click', function(){ openModal(c); }); });
+    catRows.appendChild(row);
   });
 
   var backdrop = document.getElementById('modalBackdrop');
   function openModal(c){
-    document.getElementById('modalIcon').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="#f2b705" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">' + c.icon + '</svg>';
     document.getElementById('modalTitle').textContent = c.name;
     document.getElementById('modalMeta').textContent = c.moq;
     document.getElementById('modalDesc').textContent = c.desc;
-    document.getElementById('modalSubs').innerHTML = c.subs.map(function(s){ return '<span class="m-sub">' + s + '</span>'; }).join('');
-    document.getElementById('modalTiers').innerHTML = c.tiers.map(function(t){ return '<div class="m-tier-row"><span>' + t[0] + '</span><span>' + t[1] + '</span></div>'; }).join('');
+    document.getElementById('modalSubs').textContent = c.subs.join('  ·  ');
     backdrop.classList.add('open');
   }
   function closeModal(){ backdrop.classList.remove('open'); }
@@ -576,7 +492,7 @@
 
   var faqs = [
     { q:'How do I open a wholesale trade account?', a:'Submit a resale certificate or business license through the request form below. Verification and account activation typically take 24 to 48 hours, and there is no cost to apply.' },
-    { q:'What are your minimum order quantities?', a:'MOQs are set per category, generally between 40 and 100 units. Larger items and pallet-priced lines are quoted per pallet, and volume tiers apply automatically as your order grows.' },
+    { q:'What are your minimum order quantities?', a:'MOQs are set per category, generally between 30 and 50 units. Larger orders are quoted per pallet, and your account rep can walk through volume specifics for your category.' },
     { q:'Are the products authentic and supplier-verified?', a:'Yes. Every supplier on the network is vetted for authenticity and sourcing documentation before listing, and invoices are available on request for any order.' },
     { q:'Do you support drop-shipping to end customers?', a:'Yes, for approved trade accounts, with blind packing slips and integration support for common ecommerce platforms.' },
     { q:'How fast do orders ship?', a:'Standard orders dispatch within 24 hours of confirmation from the nearest partner warehouse in our fulfillment network.' }
