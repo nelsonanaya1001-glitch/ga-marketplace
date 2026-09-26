@@ -362,9 +362,10 @@
               <select id="equipType" class="mono">
                 <option value="Dry Van">Dry Van</option>
                 <option value="Reefer">Reefer</option>
-                <option value="Flatbed">Flatbed</option>
-                <option value="Box Truck">Box Truck</option>
+                <option value="Step Deck">Step Deck</option>
+                <option value="Conestoga">Conestoga</option>
                 <option value="Power Only">Power Only</option>
+                <option value="LTL Consolidation">LTL Consolidation</option>
               </select>
             </div>
           </div>
@@ -598,7 +599,7 @@
   var quoteResult = document.getElementById('quoteResult');
   var quoteRate = document.getElementById('quoteRate');
   var quoteMeta = document.getElementById('quoteMeta');
-  var rateByEquip = { 'Dry Van':2.45, 'Reefer':2.95, 'Flatbed':2.65, 'Box Truck':2.20, 'Power Only':2.35 };
+  var rateByEquip = { 'Dry Van':2.45, 'Reefer':2.95, 'Step Deck':2.70, 'Conestoga':2.80, 'Power Only':2.35, 'LTL Consolidation':2.00 };
 
   quoteBtn.addEventListener('click', function(){
     var o = document.getElementById('originZip').value.trim();
