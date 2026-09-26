@@ -1,0 +1,678 @@
+<title>GA Marketplace</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#07080b;
+    --panel:#101319;
+    --panel-2:#151a22;
+    --line: rgba(244,245,242,0.12);
+    --blue:#2b5dff;
+    --blue-deep:#0a1a4d;
+    --blue-bright:#5b82ff;
+    --yellow:#f5c518;
+    --yellow-deep:#c99a00;
+    --paper:#f4f5f2;
+    --ink-soft: rgba(244,245,242,0.62);
+    --ink-faint: rgba(244,245,242,0.38);
+    font-family: 'IBM Plex Sans', system-ui, sans-serif;
+  }
+
+  *{box-sizing:border-box;}
+  body{
+    margin:0;
+    background:var(--ink);
+    color:var(--paper);
+    padding-inline:0;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  img{max-width:100%;}
+  h1,h2,h3{margin:0; text-wrap:balance;}
+  p{margin:0;}
+  a{color:inherit; text-decoration:none;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .display{ font-family:'Anton', 'Arial Narrow', sans-serif; text-transform:uppercase; letter-spacing:0.01em; }
+  .mono{ font-family:'IBM Plex Mono', monospace; font-variant-numeric: tabular-nums; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace;
+    font-size:0.72rem;
+    letter-spacing:0.18em;
+    text-transform:uppercase;
+    color:var(--yellow);
+  }
+
+  .wrap{ max-width:1240px; margin:0 auto; padding-inline:24px; }
+
+  /* ---------- NAV ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    background:rgba(7,8,11,0.92);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+    padding-block: 14px;
+  }
+  .topbar .wrap{ display:flex; align-items:center; justify-content:space-between; gap:16px; }
+  .brand{ display:flex; align-items:center; gap:10px; font-family:'Anton',sans-serif; font-size:1.15rem; letter-spacing:0.03em; white-space:nowrap; }
+  .brand .mark{
+    width:34px; height:34px; flex:none;
+    background: linear-gradient(135deg, var(--blue) 0%, var(--blue-deep) 100%);
+    border-radius:6px;
+    position:relative;
+    box-shadow: inset 0 0 0 2px var(--yellow);
+  }
+  .brand .mark::before, .brand .mark::after{
+    content:''; position:absolute; background:var(--yellow);
+  }
+  .brand .mark::before{ width:16px; height:3px; left:9px; top:15.5px; transform:rotate(45deg); }
+  .brand .mark::after{ width:16px; height:3px; left:9px; top:15.5px; transform:rotate(-45deg); }
+  .brand span.ga{ color:var(--paper); }
+  .brand span.mkt{ color:var(--yellow); }
+
+  .navlinks{ display:flex; align-items:center; gap:28px; font-size:0.88rem; font-weight:500; }
+  .navlinks a{ color:var(--ink-soft); transition:color .15s ease; }
+  .navlinks a:hover{ color:var(--paper); }
+
+  .nav-right{ display:flex; align-items:center; gap:16px; }
+  .nav-phone{ display:flex; align-items:center; gap:8px; font-family:'IBM Plex Mono',monospace; font-size:0.85rem; color:var(--paper); white-space:nowrap; }
+  .nav-phone svg{ flex:none; }
+
+  .btn{
+    display:inline-flex; align-items:center; justify-content:center; gap:8px;
+    padding:11px 20px; border-radius:3px; font-weight:700; font-size:0.85rem;
+    letter-spacing:0.02em; border:1.5px solid transparent; white-space:nowrap;
+    transition: transform .15s ease, box-shadow .15s ease, background .15s ease;
+  }
+  .btn-primary{ background:var(--yellow); color:var(--ink); }
+  .btn-primary:hover{ transform:translateY(-1px); box-shadow:0 6px 18px rgba(245,197,24,0.28); }
+  .btn-ghost{ border-color:var(--line); color:var(--paper); background:transparent; }
+  .btn-ghost:hover{ border-color:var(--blue-bright); color:var(--blue-bright); }
+
+  .burger{ display:none; width:38px; height:38px; border-radius:4px; border:1px solid var(--line); background:transparent; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
+  .burger span{ display:block; width:18px; height:2px; background:var(--paper); }
+
+  .mobile-menu{ display:none; flex-direction:column; gap:2px; padding:14px 24px 18px; border-bottom:1px solid var(--line); background:var(--ink); }
+  .mobile-menu a{ padding:12px 0; border-bottom:1px solid var(--line); color:var(--ink-soft); font-size:0.95rem; }
+  .mobile-menu.open{ display:flex; }
+
+  /* ---------- HERO ---------- */
+  .hero{ position:relative; overflow:hidden; }
+  .hero-grid{
+    display:grid; grid-template-columns: 1.05fr 0.95fr;
+    align-items:stretch;
+  }
+  .hero-left{ padding: 68px 24px 56px; max-width:1240px; margin-left:auto; }
+  .hero-left-inner{ max-width: 560px; margin-left:auto; padding-left:24px; }
+
+  .hero-right{
+    position:relative;
+    background: linear-gradient(160deg, var(--blue-deep) 0%, var(--blue) 62%, #143a99 100%);
+    clip-path: polygon(9% 0, 100% 0, 100% 100%, 0% 100%);
+    min-height: 560px;
+  }
+  .route-svg{ position:absolute; inset:0; width:100%; height:100%; }
+  .route-dash{ stroke-dasharray: 10 9; animation: dashmove 3.2s linear infinite; }
+  @keyframes dashmove{ to{ stroke-dashoffset: -76; } }
+  .route-pulse{ animation: pulse 2.2s ease-in-out infinite; }
+  @keyframes pulse{ 0%,100%{ opacity:1; transform:scale(1);} 50%{ opacity:0.55; transform:scale(1.5);} }
+
+  .ticket{
+    position:absolute;
+    background: rgba(7,8,11,0.72);
+    border:1px solid rgba(244,245,242,0.18);
+    border-radius:4px;
+    padding:10px 14px;
+    font-family:'IBM Plex Mono',monospace;
+    font-size:0.72rem;
+    color:var(--paper);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  }
+  .ticket .num{ font-family:'Anton',sans-serif; font-size:1.35rem; color:var(--yellow); display:block; line-height:1; margin-bottom:2px; }
+  .ticket-a{ top:11%; right:8%; transform: rotate(-3deg); }
+  .ticket-b{ top:44%; left:6%; transform: rotate(2deg); }
+  .ticket-c{ bottom:9%; right:14%; transform: rotate(-2deg); }
+
+  .eyebrow-row{ display:flex; align-items:center; gap:10px; margin-bottom:22px; }
+  .eyebrow-row .dot{ width:7px; height:7px; border-radius:50%; background:var(--yellow); box-shadow:0 0 0 4px rgba(245,197,24,0.18); }
+
+  .hero-h1{ font-size: clamp(2.6rem, 5.6vw, 4.3rem); line-height:0.98; color:var(--paper); }
+  .hero-h1 em{ font-style:normal; color:var(--yellow); }
+  .hero-sub{ margin-top:20px; font-size:1.02rem; line-height:1.55; color:var(--ink-soft); max-width:480px; }
+
+  /* quote card */
+  .quote-card{
+    margin-top:34px;
+    background:var(--panel);
+    border:1px solid var(--line);
+    border-radius:8px;
+    padding:22px;
+    position:relative;
+  }
+  .quote-card::before{
+    content:'BOL · GA-MKT'; position:absolute; top:-11px; left:18px; background:var(--ink);
+    padding:0 8px; font-family:'IBM Plex Mono',monospace; font-size:0.62rem; letter-spacing:0.12em; color:var(--ink-faint);
+  }
+  .quote-title{ font-size:0.78rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-soft); margin-bottom:16px; font-weight:600; }
+  .quote-fields{ display:grid; grid-template-columns: 1fr 1fr; gap:12px; }
+  .field{ display:flex; flex-direction:column; gap:6px; }
+  .field.full{ grid-column: 1 / -1; }
+  .field label{ font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); }
+  .field input, .field select{
+    background:var(--panel-2); border:1px solid var(--line); border-radius:4px;
+    padding:10px 12px; color:var(--paper); font-family:'IBM Plex Mono',monospace; font-size:0.9rem;
+    outline:none;
+  }
+  .field input:focus, .field select:focus{ border-color:var(--blue-bright); }
+  .field input::placeholder{ color:var(--ink-faint); }
+
+  .quote-submit{ margin-top:14px; width:100%; }
+  .quote-result{
+    margin-top:16px; padding-top:16px; border-top:1px dashed var(--line);
+    display:none; align-items:center; justify-content:space-between; gap:14px; flex-wrap:wrap;
+  }
+  .quote-result.show{ display:flex; }
+  .quote-result .rate{ font-family:'Anton',sans-serif; font-size:1.9rem; color:var(--yellow); line-height:1; }
+  .quote-result .meta{ font-family:'IBM Plex Mono',monospace; font-size:0.72rem; color:var(--ink-faint); margin-top:4px; }
+  .quote-note{ font-size:0.68rem; color:var(--ink-faint); margin-top:10px; }
+
+  /* ---------- LEDGER STRIP ---------- */
+  .ledger{ background:var(--yellow); }
+  .ledger .wrap{
+    display:grid; grid-template-columns: repeat(4, 1fr);
+    padding-block:26px; gap:18px;
+  }
+  .ledger-item{ border-left:2px solid rgba(7,8,11,0.35); padding-left:16px; }
+  .ledger-item:first-child{ border-left:none; padding-left:0; }
+  .ledger-item .val{ font-family:'Anton',sans-serif; font-size:1.9rem; color:var(--ink); line-height:1; }
+  .ledger-item .lbl{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; letter-spacing:0.05em; color:rgba(7,8,11,0.68); margin-top:4px; text-transform:uppercase; }
+
+  /* ---------- SECTION HEADS ---------- */
+  section{ padding-block: 84px; }
+  .sec-head{ max-width:640px; margin-bottom:56px; }
+  .sec-head .eyebrow{ display:block; margin-bottom:12px; }
+  .sec-head h2{ font-size: clamp(1.9rem, 3.4vw, 2.6rem); color:var(--paper); }
+  .sec-head p{ margin-top:14px; color:var(--ink-soft); font-size:1rem; line-height:1.6; }
+
+  /* ---------- SERVICES (asymmetric rows) ---------- */
+  .service-row{ display:grid; grid-template-columns: 1fr 1fr; gap:48px; align-items:center; padding-block:44px; border-top:1px solid var(--line); }
+  .service-row:first-of-type{ border-top:1px solid var(--line); }
+  .service-row.reverse{ grid-template-columns: 0.8fr 1.2fr; }
+  .service-row.reverse .s-visual{ order:2; }
+  .service-row.reverse .s-text{ order:1; }
+  .service-row:not(.reverse){ grid-template-columns: 1.2fr 0.8fr; }
+
+  .s-text .s-index{ font-family:'IBM Plex Mono',monospace; color:var(--blue-bright); font-size:0.78rem; letter-spacing:0.08em; }
+  .s-text h3{ margin-top:10px; font-size:1.5rem; color:var(--paper); font-family:'IBM Plex Sans',sans-serif; font-weight:700; }
+  .s-text p{ margin-top:12px; color:var(--ink-soft); line-height:1.6; max-width:440px; }
+
+  .s-visual{
+    height:200px; border-radius:8px; position:relative; overflow:hidden;
+    background: var(--panel);
+    border:1px solid var(--line);
+    display:flex; align-items:center; justify-content:center;
+  }
+  .s-visual svg{ width:56%; height:56%; }
+  .s-visual::after{ content:''; position:absolute; inset:0; background: radial-gradient(circle at 30% 20%, rgba(43,93,255,0.22), transparent 60%); }
+
+  /* ---------- LANES (horizontal scroll marketplace) ---------- */
+  .lane-scroll{ display:flex; gap:18px; overflow-x:auto; padding-bottom:14px; scroll-snap-type:x proximity; -webkit-overflow-scrolling:touch; }
+  .lane-scroll::-webkit-scrollbar{ height:6px; }
+  .lane-scroll::-webkit-scrollbar-thumb{ background:var(--line); border-radius:4px; }
+  .lane-card{
+    flex:none; width:250px; scroll-snap-align:start;
+    background:var(--panel); border:1px solid var(--line); border-radius:8px;
+    padding:20px; cursor:pointer; transition:border-color .15s ease, transform .15s ease;
+    text-align:left;
+  }
+  .lane-card:hover{ border-color:var(--blue-bright); transform:translateY(-3px); }
+  .lane-card .lane-visual{ height:86px; display:flex; align-items:center; justify-content:center; margin-bottom:16px; }
+  .lane-card .lane-visual svg{ width:100%; height:100%; }
+  .lane-card h4{ font-size:1.05rem; color:var(--paper); font-weight:700; }
+  .lane-card .lane-rate{ font-family:'IBM Plex Mono',monospace; font-size:0.78rem; color:var(--yellow); margin-top:6px; }
+  .lane-card .lane-cta{ margin-top:14px; font-size:0.75rem; color:var(--ink-faint); letter-spacing:0.05em; text-transform:uppercase; display:flex; align-items:center; gap:6px; }
+
+  /* modal */
+  .modal-backdrop{
+    position:fixed; inset:0; background:rgba(7,8,11,0.72); backdrop-filter:blur(4px);
+    display:none; align-items:center; justify-content:center; z-index:100; padding:24px;
+  }
+  .modal-backdrop.open{ display:flex; }
+  .modal{
+    background:var(--panel); border:1px solid var(--line); border-radius:10px;
+    max-width:460px; width:100%; padding:28px; position:relative;
+  }
+  .modal-close{ position:absolute; top:16px; right:16px; width:32px; height:32px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--paper); font-size:1rem; }
+  .modal .m-visual{ height:110px; display:flex; align-items:center; justify-content:center; margin-bottom:18px; }
+  .modal .m-visual svg{ width:70%; height:100%; }
+  .modal h3{ font-size:1.4rem; color:var(--paper); }
+  .modal .m-specs{ margin-top:18px; display:grid; grid-template-columns:1fr 1fr; gap:12px; }
+  .modal .m-spec{ border-top:1px solid var(--line); padding-top:8px; }
+  .modal .m-spec .k{ font-family:'IBM Plex Mono',monospace; font-size:0.65rem; text-transform:uppercase; letter-spacing:0.06em; color:var(--ink-faint); }
+  .modal .m-spec .v{ font-size:0.9rem; color:var(--paper); margin-top:4px; font-weight:600; }
+  .modal .m-use{ margin-top:16px; color:var(--ink-soft); font-size:0.92rem; line-height:1.55; }
+
+  /* ---------- HOW IT WORKS ---------- */
+  .steps{ display:grid; grid-template-columns: repeat(4, 1fr); gap:22px; }
+  .step{ background:var(--panel); border:1px solid var(--line); border-radius:8px; padding:24px; position:relative; }
+  .step .step-num{ font-family:'Anton',sans-serif; font-size:2.2rem; color:rgba(244,245,242,0.14); position:absolute; top:14px; right:18px; }
+  .step h4{ font-size:1.05rem; color:var(--paper); margin-top:6px; }
+  .step p{ margin-top:10px; font-size:0.88rem; color:var(--ink-soft); line-height:1.55; }
+  .step .step-tag{ font-family:'IBM Plex Mono',monospace; font-size:0.68rem; color:var(--blue-bright); letter-spacing:0.06em; }
+
+  /* ---------- CTA BANNER ---------- */
+  .cta-banner{
+    background: linear-gradient(100deg, var(--yellow) 0%, var(--yellow) 55%, #e0b800 100%);
+    clip-path: polygon(0 6%, 100% 0, 100% 94%, 0 100%);
+    padding-block:64px;
+  }
+  .cta-banner .wrap{ display:flex; align-items:center; justify-content:space-between; gap:32px; flex-wrap:wrap; }
+  .cta-banner h2{ font-size:clamp(1.7rem, 3.2vw, 2.4rem); color:var(--ink); max-width:480px; }
+  .cta-contacts{ display:flex; flex-direction:column; gap:10px; }
+  .cta-contacts a{ display:flex; align-items:center; gap:10px; font-family:'IBM Plex Mono',monospace; color:var(--ink); font-weight:600; font-size:0.95rem; }
+  .cta-banner .btn-primary{ background:var(--ink); color:var(--yellow); }
+  .cta-banner .btn-primary:hover{ box-shadow:0 6px 18px rgba(7,8,11,0.35); }
+
+  /* ---------- FOOTER ---------- */
+  footer{ background:var(--ink); border-top:1px solid var(--line); padding-block:56px 28px; }
+  .foot-grid{ display:grid; grid-template-columns: 1.4fr 0.8fr 0.8fr 1fr; gap:36px; }
+  .foot-brand p{ margin-top:14px; color:var(--ink-soft); font-size:0.88rem; line-height:1.6; max-width:280px; }
+  .foot-col h5{ font-size:0.72rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--ink-faint); margin-bottom:14px; }
+  .foot-col a, .foot-col p{ display:block; color:var(--ink-soft); font-size:0.88rem; margin-bottom:10px; }
+  .foot-col a:hover{ color:var(--yellow); }
+  .foot-bottom{ margin-top:44px; padding-top:22px; border-top:1px solid var(--line); display:flex; justify-content:space-between; flex-wrap:wrap; gap:10px; font-size:0.78rem; color:var(--ink-faint); }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 980px){
+    .navlinks{ display:none; }
+    .burger{ display:flex; }
+    .hero-grid{ grid-template-columns:1fr; }
+    .hero-right{ clip-path:none; min-height:340px; order:-1; }
+    .hero-left{ margin-left:0; padding-top:36px; }
+    .hero-left-inner{ margin-left:0; padding-left:0; max-width:100%; }
+    .ledger .wrap{ grid-template-columns: repeat(2,1fr); row-gap:20px; }
+    .ledger-item:nth-child(3){ border-left:none; padding-left:0; }
+    .service-row, .service-row.reverse{ grid-template-columns:1fr; gap:24px; }
+    .service-row .s-visual, .service-row.reverse .s-visual{ order:1; height:160px; }
+    .service-row .s-text, .service-row.reverse .s-text{ order:2; }
+    .steps{ grid-template-columns:1fr 1fr; }
+    .foot-grid{ grid-template-columns:1fr 1fr; }
+    .cta-banner{ clip-path:none; }
+  }
+  @media (max-width: 620px){
+    .quote-fields{ grid-template-columns:1fr; }
+    .steps{ grid-template-columns:1fr; }
+    .foot-grid{ grid-template-columns:1fr; }
+    .nav-phone{ display:none; }
+    section{ padding-block:56px; }
+  }
+</style>
+
+<div class="topbar">
+  <div class="wrap">
+    <a class="brand" href="#top"><span class="mark"></span><span class="ga">GA</span> <span class="mkt">MARKETPLACE</span></a>
+    <nav class="navlinks">
+      <a href="#services">Services</a>
+      <a href="#lanes">Lanes</a>
+      <a href="#how">How It Works</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <div class="nav-right">
+      <a class="nav-phone" href="tel:+17866223740">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +1 (786) 622-3740
+      </a>
+      <a class="btn btn-primary" href="#quote">Get a Quote</a>
+      <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services">Services</a>
+    <a href="#lanes">Lanes</a>
+    <a href="#how">How It Works</a>
+    <a href="#contact">Contact</a>
+    <a href="tel:+17866223740">+1 (786) 622-3740</a>
+  </div>
+</div>
+
+<div id="top"></div>
+
+<section class="hero" style="padding-block:0;">
+  <div class="hero-grid">
+    <div class="hero-left">
+      <div class="hero-left-inner">
+        <div class="eyebrow-row"><span class="dot"></span><span class="eyebrow">Freight Marketplace — Carriers Nationwide</span></div>
+        <h1 class="hero-h1 display">Book the lane.<br>Not the <em>runaround</em>.</h1>
+        <p class="hero-sub">GA Marketplace matches your freight with vetted, insured carriers in minutes — instant rates, live tracking, and a dispatch desk that actually picks up.</p>
+
+        <div class="quote-card" id="quote">
+          <div class="quote-title">Instant Rate Estimate</div>
+          <div class="quote-fields">
+            <div class="field">
+              <label for="originZip">Origin ZIP</label>
+              <input id="originZip" class="mono" type="text" inputmode="numeric" maxlength="5" placeholder="33101" />
+            </div>
+            <div class="field">
+              <label for="destZip">Destination ZIP</label>
+              <input id="destZip" class="mono" type="text" inputmode="numeric" maxlength="5" placeholder="30301" />
+            </div>
+            <div class="field full">
+              <label for="equipType">Equipment</label>
+              <select id="equipType" class="mono">
+                <option value="Dry Van">Dry Van</option>
+                <option value="Reefer">Reefer</option>
+                <option value="Flatbed">Flatbed</option>
+                <option value="Box Truck">Box Truck</option>
+                <option value="Power Only">Power Only</option>
+              </select>
+            </div>
+          </div>
+          <button class="btn btn-primary quote-submit" id="quoteBtn">Get Instant Rate</button>
+          <div class="quote-result" id="quoteResult">
+            <div>
+              <div class="rate" id="quoteRate">$0</div>
+              <div class="meta" id="quoteMeta">— MI · $0.00/MI</div>
+            </div>
+            <a class="btn btn-ghost" href="tel:+17866223740">Call Dispatch</a>
+          </div>
+          <div class="quote-note">Estimate only — final rate confirmed by a dispatcher before booking.</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="hero-right">
+      <svg class="route-svg" viewBox="0 0 500 560" preserveAspectRatio="xMidYMid slice">
+        <circle cx="120" cy="140" r="6" fill="#f5c518"/>
+        <circle cx="120" cy="140" r="14" fill="none" stroke="#f5c518" stroke-width="1.5" opacity="0.5" class="route-pulse"/>
+        <circle cx="390" cy="430" r="6" fill="#f5c518"/>
+        <path d="M120,140 C 210,220 260,300 390,430" fill="none" stroke="#f5c518" stroke-width="2.5" class="route-dash" opacity="0.85"/>
+        <path d="M120,140 C 210,220 260,300 390,430" fill="none" stroke="#f4f5f2" stroke-width="1" opacity="0.15"/>
+      </svg>
+      <div class="ticket ticket-a"><span class="num">2,400+</span>Active Carriers</div>
+      <div class="ticket ticket-b"><span class="num">48</span>States Covered</div>
+      <div class="ticket ticket-c"><span class="num">98.6%</span>On-Time Delivery</div>
+    </div>
+  </div>
+</section>
+
+<div class="ledger">
+  <div class="wrap">
+    <div class="ledger-item"><div class="val mono">2,400+</div><div class="lbl">Active Carriers</div></div>
+    <div class="ledger-item"><div class="val mono">48</div><div class="lbl">States Covered</div></div>
+    <div class="ledger-item"><div class="val mono">98.6%</div><div class="lbl">On-Time Delivery</div></div>
+    <div class="ledger-item"><div class="val mono">24/7</div><div class="lbl">Dispatch Support</div></div>
+  </div>
+</div>
+
+<section id="services">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">What We Handle</span>
+      <h2>One marketplace, every lane covered.</h2>
+      <p>From first mile to final delivery, GA Marketplace runs the freight so your team doesn't have to chase carriers or paperwork.</p>
+    </div>
+
+    <div class="service-row">
+      <div class="s-text">
+        <div class="s-index mono">01 / Brokerage</div>
+        <h3>Freight Matching &amp; Brokerage</h3>
+        <p>Post a load and our network returns vetted, insured carrier options — usually within the hour, not the day.</p>
+      </div>
+      <div class="s-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#5b82ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <rect x="12" y="42" width="46" height="26" rx="2"/>
+          <path d="M58 50h16l12 12v6H58z"/>
+          <circle cx="30" cy="72" r="7" fill="#101319"/>
+          <circle cx="76" cy="72" r="7" fill="#101319"/>
+          <path d="M8 42h6M8 50h10M8 58h6" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="service-row reverse">
+      <div class="s-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#f5c518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="50" cy="42" r="5"/>
+          <path d="M50 47v14"/>
+          <path d="M32 78c0-14 8-22 18-22s18 8 18 22" opacity="0.55"/>
+          <path d="M50 30 L58 20 M50 30 L42 20" opacity="0.7"/>
+        </svg>
+      </div>
+      <div class="s-text">
+        <div class="s-index mono">02 / Visibility</div>
+        <h3>Real-Time Tracking</h3>
+        <p>Live GPS pings from pickup to delivery, shared straight to your dashboard — no calling the driver for a status check.</p>
+      </div>
+    </div>
+
+    <div class="service-row">
+      <div class="s-text">
+        <div class="s-index mono">03 / Storage</div>
+        <h3>Warehousing &amp; Cross-Dock</h3>
+        <p>Short-term storage and cross-dock transfers through partner facilities, positioned near the lanes you run most.</p>
+      </div>
+      <div class="s-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#5b82ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M14 46 L50 22 L86 46 V80 H14 Z"/>
+          <path d="M40 80V58h20v22"/>
+          <path d="M14 46 H86" opacity="0.5"/>
+        </svg>
+      </div>
+    </div>
+
+    <div class="service-row reverse">
+      <div class="s-visual">
+        <svg viewBox="0 0 100 100" fill="none" stroke="#f5c518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">
+          <circle cx="30" cy="70" r="6"/>
+          <circle cx="70" cy="30" r="6"/>
+          <circle cx="70" cy="70" r="6"/>
+          <path d="M30 70L70 30M30 70L70 70M70 30L70 70" opacity="0.6"/>
+        </svg>
+      </div>
+      <div class="s-text">
+        <div class="s-index mono">04 / Capacity</div>
+        <h3>Dedicated Fleet Capacity</h3>
+        <p>Lock in contracted lanes and guaranteed truck capacity for the freight you move week after week.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="lanes" style="background:var(--panel-2); border-top:1px solid var(--line); border-bottom:1px solid var(--line);">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">Equipment Marketplace</span>
+      <h2>Pick the trailer. See the range.</h2>
+      <p>Tap any equipment type for specs, typical use cases, and current rate ranges across our carrier network.</p>
+    </div>
+    <div class="lane-scroll" id="laneScroll">
+      <!-- lane cards injected by JS -->
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="sec-head">
+      <span class="eyebrow">The Process</span>
+      <h2>Four steps from dock to delivered.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="step-num">01</div>
+        <div class="step-tag mono">POST</div>
+        <h4>Post Your Load</h4>
+        <p>Enter pickup, drop-off, weight, and equipment type in the marketplace.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">02</div>
+        <div class="step-tag mono">MATCH</div>
+        <h4>Get Matched</h4>
+        <p>Vetted carrier rates come back in minutes, ranked by price and availability.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">03</div>
+        <div class="step-tag mono">TRACK</div>
+        <h4>Track It Live</h4>
+        <p>Follow the shipment door-to-door with GPS check-ins along the route.</p>
+      </div>
+      <div class="step">
+        <div class="step-num">04</div>
+        <div class="step-tag mono">SETTLE</div>
+        <h4>Confirm &amp; Pay</h4>
+        <p>Delivery's confirmed, paperwork's signed, and settlement runs through GA Marketplace.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="cta-banner" id="contact">
+  <div class="wrap">
+    <h2 class="display">Ready to move your next load?</h2>
+    <div class="cta-contacts">
+      <a href="tel:+17866223740">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+        +1 (786) 622-3740
+      </a>
+      <a href="mailto:Fabucha66@hotmail.com">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16v16H4z"/><path d="M22 6l-10 7L2 6"/></svg>
+        Fabucha66@hotmail.com
+      </a>
+    </div>
+    <a class="btn btn-primary" href="#quote">Get a Quote</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="brand" href="#top"><span class="mark"></span><span class="ga">GA</span> <span class="mkt">MARKETPLACE</span></a>
+        <p>A freight marketplace connecting shippers with vetted carriers nationwide — instant rates, live tracking, real dispatch support.</p>
+      </div>
+      <div class="foot-col">
+        <h5>Company</h5>
+        <a href="#services">Services</a>
+        <a href="#lanes">Lanes</a>
+        <a href="#how">How It Works</a>
+      </div>
+      <div class="foot-col">
+        <h5>Marketplace</h5>
+        <a href="#quote">Get a Quote</a>
+        <a href="#contact">Contact Dispatch</a>
+      </div>
+      <div class="foot-col">
+        <h5>Contact</h5>
+        <a href="tel:+17866223740">+1 (786) 622-3740</a>
+        <a href="mailto:Fabucha66@hotmail.com">Fabucha66@hotmail.com</a>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span>© 2026 GA Marketplace. All rights reserved.</span>
+      <span class="mono">GA-MKT · FREIGHT BROKERAGE</span>
+    </div>
+  </div>
+</footer>
+
+<div class="modal-backdrop" id="modalBackdrop">
+  <div class="modal">
+    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+    <div class="m-visual" id="modalVisual"></div>
+    <h3 id="modalTitle"></h3>
+    <div class="m-specs" id="modalSpecs"></div>
+    <p class="m-use" id="modalUse"></p>
+  </div>
+</div>
+
+<script>
+(function(){
+  // mobile menu
+  var burger = document.getElementById('burgerBtn');
+  var menu = document.getElementById('mobileMenu');
+  burger.addEventListener('click', function(){ menu.classList.toggle('open'); });
+  menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
+
+  // quote calculator (demo estimate, not a live rate feed)
+  var quoteBtn = document.getElementById('quoteBtn');
+  var quoteResult = document.getElementById('quoteResult');
+  var quoteRate = document.getElementById('quoteRate');
+  var quoteMeta = document.getElementById('quoteMeta');
+  var rateByEquip = { 'Dry Van':2.45, 'Reefer':2.95, 'Flatbed':2.65, 'Box Truck':2.20, 'Power Only':2.35 };
+
+  quoteBtn.addEventListener('click', function(){
+    var o = document.getElementById('originZip').value.trim();
+    var d = document.getElementById('destZip').value.trim();
+    var equip = document.getElementById('equipType').value;
+    var oNum = parseInt(o, 10);
+    var dNum = parseInt(d, 10);
+    if (!o || !d || isNaN(oNum) || isNaN(dNum)) {
+      document.getElementById('originZip').style.borderColor = o ? 'var(--line)' : '#e04b4b';
+      document.getElementById('destZip').style.borderColor = d ? 'var(--line)' : '#e04b4b';
+      return;
+    }
+    document.getElementById('originZip').style.borderColor = 'var(--line)';
+    document.getElementById('destZip').style.borderColor = 'var(--line)';
+
+    var diff = Math.abs(oNum - dNum);
+    var miles = Math.max(85, Math.min(2400, Math.round(diff * 0.9 + 120)));
+    var perMile = rateByEquip[equip] || 2.4;
+    var total = Math.round(miles * perMile);
+
+    quoteRate.textContent = '$' + total.toLocaleString();
+    quoteMeta.textContent = miles.toLocaleString() + ' MI · $' + perMile.toFixed(2) + '/MI · ' + equip;
+    quoteResult.classList.add('show');
+  });
+
+  // lane / equipment marketplace
+  var lanes = [
+    { name:'Dry Van', rate:'$2.10 – $2.85 / mi', weight:'45,000 lbs', dims:"53' x 8.5' x 9'", temp:'Ambient', use:'General freight, palletized goods, retail and consumer packaged goods moving dock-to-dock nationwide.',
+      svg:'<rect x="8" y="34" width="60" height="30" rx="2"/><path d="M68 42h16l10 10v12H68z"/><circle cx="26" cy="66" r="8" fill="#101319"/><circle cx="80" cy="66" r="8" fill="#101319"/>' },
+    { name:'Reefer', rate:'$2.60 – $3.40 / mi', weight:'43,500 lbs', dims:"53' x 8.5' x 9'", temp:'-20°F to 70°F', use:'Perishables, pharmaceuticals, and other temperature-controlled freight requiring continuous monitoring.',
+      svg:'<rect x="8" y="34" width="60" height="30" rx="2"/><path d="M68 42h16l10 10v12H68z"/><path d="M20 40v18M32 40v18M44 40v18M56 40v18" opacity="0.5"/><circle cx="26" cy="66" r="8" fill="#101319"/><circle cx="80" cy="66" r="8" fill="#101319"/>' },
+    { name:'Flatbed', rate:'$2.30 – $3.10 / mi', weight:'48,000 lbs', dims:"48'–53' deck", temp:'Ambient', use:'Steel coils, lumber, machinery, and oversized loads that need top and side loading access.',
+      svg:'<rect x="8" y="50" width="76" height="8"/><rect x="20" y="30" width="14" height="20" opacity="0.6"/><rect x="38" y="24" width="14" height="26" opacity="0.6"/><circle cx="24" cy="66" r="8" fill="#101319"/><circle cx="78" cy="66" r="8" fill="#101319"/>' },
+    { name:'Box Truck', rate:'$1.90 – $2.60 / mi', weight:'10,000–26,000 lbs', dims:"16'–26' box", temp:'Ambient', use:'Local and regional LTL runs, last-mile delivery, and smaller shipments that don’t need a full trailer.',
+      svg:'<rect x="10" y="30" width="18" height="34" rx="2"/><rect x="30" y="40" width="50" height="24" rx="2"/><circle cx="22" cy="68" r="8" fill="#101319"/><circle cx="66" cy="68" r="8" fill="#101319"/>' },
+    { name:'Power Only', rate:'$2.00 – $2.75 / mi', weight:'Tows shipper trailer', dims:'Tractor only', temp:'N/A', use:'Drop-and-hook moves and trailer repositioning where the shipper already owns the trailer.',
+      svg:'<rect x="14" y="34" width="30" height="26" rx="2"/><path d="M44 38h14l8 8v14H44z"/><circle cx="26" cy="64" r="8" fill="#101319"/><circle cx="60" cy="64" r="8" fill="#101319"/>' },
+    { name:'Intermodal', rate:'$1.70 – $2.40 / mi', weight:'44,000 lbs', dims:"20'/40' container", temp:'Ambient / Reefer', use:'Long-haul freight moved via rail with drayage on each end for meaningful cost savings.',
+      svg:'<rect x="10" y="34" width="70" height="26" rx="2"/><path d="M10 60h70M20 60v8M40 60v8M60 60v8" opacity="0.5"/><circle cx="24" cy="66" r="6" fill="#101319"/><circle cx="66" cy="66" r="6" fill="#101319"/>' }
+  ];
+
+  var laneScroll = document.getElementById('laneScroll');
+  lanes.forEach(function(l){
+    var card = document.createElement('button');
+    card.className = 'lane-card';
+    card.innerHTML =
+      '<div class="lane-visual"><svg viewBox="0 0 96 76" fill="none" stroke="#5b82ff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' + l.svg + '</svg></div>' +
+      '<h4>' + l.name + '</h4>' +
+      '<div class="lane-rate mono">' + l.rate + '</div>' +
+      '<div class="lane-cta">View specs →</div>';
+    card.addEventListener('click', function(){ openModal(l); });
+    laneScroll.appendChild(card);
+  });
+
+  var backdrop = document.getElementById('modalBackdrop');
+  var modalVisual = document.getElementById('modalVisual');
+  var modalTitle = document.getElementById('modalTitle');
+  var modalSpecs = document.getElementById('modalSpecs');
+  var modalUse = document.getElementById('modalUse');
+
+  function openModal(l){
+    modalVisual.innerHTML = '<svg viewBox="0 0 96 76" fill="none" stroke="#f5c518" stroke-width="3" stroke-linecap="round" stroke-linejoin="round">' + l.svg + '</svg>';
+    modalTitle.textContent = l.name;
+    modalSpecs.innerHTML =
+      '<div class="m-spec"><div class="k">Max Weight</div><div class="v">' + l.weight + '</div></div>' +
+      '<div class="m-spec"><div class="k">Dimensions</div><div class="v">' + l.dims + '</div></div>' +
+      '<div class="m-spec"><div class="k">Temp Range</div><div class="v">' + l.temp + '</div></div>' +
+      '<div class="m-spec"><div class="k">Rate Range</div><div class="v">' + l.rate + '</div></div>';
+    modalUse.textContent = l.use;
+    backdrop.classList.add('open');
+  }
+  function closeModal(){ backdrop.classList.remove('open'); }
+  document.getElementById('modalClose').addEventListener('click', closeModal);
+  backdrop.addEventListener('click', function(e){ if (e.target === backdrop) closeModal(); });
+  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
+})();
+</script>
