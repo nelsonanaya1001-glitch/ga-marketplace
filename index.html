@@ -630,14 +630,14 @@
       svg:'<rect x="8" y="34" width="60" height="30" rx="2"/><path d="M68 42h16l10 10v12H68z"/><circle cx="26" cy="66" r="8" fill="#101319"/><circle cx="80" cy="66" r="8" fill="#101319"/>' },
     { name:'Reefer', rate:'$2.60 – $3.40 / mi', weight:'43,500 lbs', dims:"53' x 8.5' x 9'", temp:'-20°F to 70°F', use:'Perishables, pharmaceuticals, and other temperature-controlled freight requiring continuous monitoring.',
       svg:'<rect x="8" y="34" width="60" height="30" rx="2"/><path d="M68 42h16l10 10v12H68z"/><path d="M20 40v18M32 40v18M44 40v18M56 40v18" opacity="0.5"/><circle cx="26" cy="66" r="8" fill="#101319"/><circle cx="80" cy="66" r="8" fill="#101319"/>' },
-    { name:'Flatbed', rate:'$2.30 – $3.10 / mi', weight:'48,000 lbs', dims:"48'–53' deck", temp:'Ambient', use:'Steel coils, lumber, machinery, and oversized loads that need top and side loading access.',
-      svg:'<rect x="8" y="50" width="76" height="8"/><rect x="20" y="30" width="14" height="20" opacity="0.6"/><rect x="38" y="24" width="14" height="26" opacity="0.6"/><circle cx="24" cy="66" r="8" fill="#101319"/><circle cx="78" cy="66" r="8" fill="#101319"/>' },
-    { name:'Box Truck', rate:'$1.90 – $2.60 / mi', weight:'10,000–26,000 lbs', dims:"16'–26' box", temp:'Ambient', use:'Local and regional LTL runs, last-mile delivery, and smaller shipments that don’t need a full trailer.',
-      svg:'<rect x="10" y="30" width="18" height="34" rx="2"/><rect x="30" y="40" width="50" height="24" rx="2"/><circle cx="22" cy="68" r="8" fill="#101319"/><circle cx="66" cy="68" r="8" fill="#101319"/>' },
+    { name:'Step Deck', rate:'$2.35 – $3.15 / mi', weight:'48,000 lbs', dims:"37'–53' lower deck", temp:'Ambient', use:'Tall machinery, construction equipment, and freight that exceeds standard flatbed height clearance.',
+      svg:'<rect x="8" y="26" width="24" height="20"/><rect x="32" y="42" width="52" height="8"/><circle cx="20" cy="66" r="8" fill="#101319"/><circle cx="70" cy="66" r="8" fill="#101319"/>' },
+    { name:'Conestoga', rate:'$2.45 – $3.25 / mi', weight:'45,000 lbs', dims:"48'–53' deck", temp:'Ambient', use:'Weather-sensitive flatbed freight — lumber, coils, machinery — protected under a retractable tarp system.',
+      svg:'<rect x="8" y="50" width="76" height="8"/><path d="M14 50 Q46 20 82 50"/><path d="M24 50 Q46 28 70 50" opacity="0.5"/><circle cx="22" cy="66" r="8" fill="#101319"/><circle cx="76" cy="66" r="8" fill="#101319"/>' },
     { name:'Power Only', rate:'$2.00 – $2.75 / mi', weight:'Tows shipper trailer', dims:'Tractor only', temp:'N/A', use:'Drop-and-hook moves and trailer repositioning where the shipper already owns the trailer.',
       svg:'<rect x="14" y="34" width="30" height="26" rx="2"/><path d="M44 38h14l8 8v14H44z"/><circle cx="26" cy="64" r="8" fill="#101319"/><circle cx="60" cy="64" r="8" fill="#101319"/>' },
-    { name:'Intermodal', rate:'$1.70 – $2.40 / mi', weight:'44,000 lbs', dims:"20'/40' container", temp:'Ambient / Reefer', use:'Long-haul freight moved via rail with drayage on each end for meaningful cost savings.',
-      svg:'<rect x="10" y="34" width="70" height="26" rx="2"/><path d="M10 60h70M20 60v8M40 60v8M60 60v8" opacity="0.5"/><circle cx="24" cy="66" r="6" fill="#101319"/><circle cx="66" cy="66" r="6" fill="#101319"/>' }
+    { name:'LTL Consolidation', rate:'$1.80 – $2.30 / mi', weight:'Up to 15,000 lbs', dims:'Palletized, shared trailer', temp:'Ambient', use:'Smaller shipments consolidated with other freight on the same trailer — pay for the space you actually use.',
+      svg:'<rect x="8" y="50" width="76" height="8"/><rect x="14" y="34" width="16" height="16"/><rect x="34" y="30" width="16" height="20"/><rect x="54" y="36" width="16" height="14"/><circle cx="22" cy="66" r="8" fill="#101319"/><circle cx="76" cy="66" r="8" fill="#101319"/>' }
   ];
 
   var laneScroll = document.getElementById('laneScroll');
