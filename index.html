@@ -9,18 +9,18 @@
     --surface-2:#12151d;
     --line: rgba(245,246,248,0.14);
     --line-soft: rgba(245,246,248,0.08);
-    --blue:#1450e0;
+    --blue:#9aa1ab;
     --blue-deep:#08174d;
-    --blue-bright:#4c78ff;
-    --yellow:#f2b705;
-    --paper:#ffffff;
-    --paper-soft:#f4f6fa;
+    --blue-bright:#c3c8d0;
+    --yellow:#ffffff;
+    --paper:#000000;
+    --paper-soft:#0d0d0f;
     --text-dark:#f5f6f8;
     --muted-dark: rgba(245,246,248,0.64);
     --faint-dark: rgba(245,246,248,0.4);
-    --text-light:#0b0d12;
-    --muted-light: rgba(11,13,18,0.62);
-    --faint-light: rgba(11,13,18,0.4);
+    --text-light:#f5f6f8;
+    --muted-light: rgba(245,246,248,0.64);
+    --faint-light: rgba(245,246,248,0.4);
     font-family:'Work Sans', system-ui, sans-serif;
   }
   *{box-sizing:border-box;}
@@ -49,10 +49,10 @@
   .nav-right{ display:flex; align-items:center; gap:14px; }
   .nav-phone{ font-family:'JetBrains Mono',monospace; font-size:0.82rem; color:var(--text-dark); white-space:nowrap; display:flex; align-items:center; gap:7px; }
   .btn{ display:inline-flex; align-items:center; justify-content:center; gap:8px; padding:11px 20px; border-radius:3px; font-weight:700; font-size:0.85rem; border:1.5px solid transparent; white-space:nowrap; transition: transform .15s ease, box-shadow .15s ease, background .15s ease, border-color .15s ease; }
-  .btn-primary{ background:var(--blue); color:#fff; }
-  .btn-primary:hover{ background:var(--blue-bright); transform:translateY(-1px); box-shadow:0 8px 20px rgba(20,80,224,0.35); }
+  .btn-primary{ background:var(--blue); color:var(--ink); }
+  .btn-primary:hover{ background:var(--blue-bright); color:var(--ink); transform:translateY(-1px); box-shadow:0 8px 20px rgba(255,255,255,0.18); }
   .btn-gold{ background:var(--yellow); color:var(--ink); }
-  .btn-gold:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(242,183,5,0.28); }
+  .btn-gold:hover{ transform:translateY(-1px); box-shadow:0 8px 20px rgba(255,255,255,0.22); }
   .btn-ghost-dark{ border-color:var(--line); color:var(--text-dark); background:transparent; }
   .btn-ghost-dark:hover{ border-color:var(--blue-bright); color:var(--blue-bright); }
   .burger{ display:none; width:38px; height:38px; border-radius:3px; border:1px solid var(--line); background:transparent; flex-direction:column; align-items:center; justify-content:center; gap:5px; }
@@ -66,8 +66,8 @@
   .hero::before{
     content:''; position:absolute; inset:0; z-index:0; pointer-events:none;
     background-image:
-      linear-gradient(rgba(76,120,255,0.07) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(76,120,255,0.07) 1px, transparent 1px);
+      linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px);
     background-size: 64px 64px;
     mask-image: radial-gradient(circle at 78% 8%, rgba(0,0,0,0.9), transparent 60%);
   }
@@ -106,19 +106,6 @@
   .cat-row .cat-link{ margin-top:16px; display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--blue-bright); background:none; border:none; padding:0; }
   .cat-row-btn{ display:block; width:100%; text-align:left; background:none; border:none; padding:0; cursor:pointer; }
   .cat-row-btn:hover h3{ color:var(--blue-bright); }
-
-  /* MODAL */
-  .modal-backdrop{ position:fixed; inset:0; background:rgba(7,8,11,0.72); backdrop-filter:blur(4px); display:none; align-items:center; justify-content:center; z-index:100; padding:24px; }
-  .modal-backdrop.open{ display:flex; }
-  .modal{ background:var(--surface); border:1px solid var(--line); border-radius:6px; max-width:460px; width:100%; padding:30px; position:relative; max-height:86vh; overflow-y:auto; }
-  .modal-close{ position:absolute; top:16px; right:16px; width:30px; height:30px; border-radius:50%; border:1px solid var(--line); background:transparent; color:var(--text-dark); }
-  .modal .accent{ display:inline-block; width:26px; height:3px; margin-bottom:16px; background:var(--yellow); }
-  .modal h3{ font-size:1.5rem; font-weight:800; color:var(--text-dark); }
-  .modal .m-meta{ margin-top:6px; font-family:'JetBrains Mono',monospace; font-size:0.78rem; color:var(--yellow); }
-  .modal .m-desc{ margin-top:14px; color:var(--muted-dark); font-size:0.92rem; line-height:1.55; }
-  .modal .m-subs{ margin-top:20px; border-top:1px solid var(--line); padding-top:16px; }
-  .modal .m-subs .m-subs-lbl{ font-size:0.68rem; letter-spacing:0.08em; text-transform:uppercase; color:var(--faint-dark); margin-bottom:10px; }
-  .modal .m-sub-list{ font-size:0.88rem; color:var(--text-dark); line-height:1.7; }
 
   /* WHY GA MARKETPLACE — plain three-up, no card boxes */
   .why-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
@@ -229,7 +216,7 @@
     <div class="hero-top">
       <div class="hero-badge"><span class="dot"></span><span class="eyebrow">Trade Accounts Only · Verified Suppliers</span></div>
       <h1 class="hero-h1 display">Source smarter.<br>Stock <em>faster.</em></h1>
-      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, and health &amp; wellness.</p>
+      <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, health &amp; wellness, and toys &amp; games.</p>
       <div class="hero-ctas">
         <a class="btn btn-primary" href="#categories">Browse Categories</a>
       </div>
@@ -241,7 +228,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Our Product Categories</span>
-      <h2>Kitchen, electronics, wellness. One account.</h2>
+      <h2>Four categories. One trade account.</h2>
       <p>Every category is sourced through vetted, authorized suppliers. Select a line for subcategories and typical order volumes.</p>
     </div>
     <div class="cat-rows" id="catRows"></div>
@@ -265,7 +252,7 @@
       <div class="step-item">
         <div class="step-num mono">02</div>
         <h4>Browse Verified Suppliers</h4>
-        <p>Real, documented inventory across kitchen appliances, household electronics, and health &amp; wellness.</p>
+        <p>Real, documented inventory across kitchen appliances, household electronics, health &amp; wellness, and toys &amp; games.</p>
       </div>
       <div class="step-item">
         <div class="step-num mono">03</div>
@@ -284,17 +271,17 @@
     </div>
     <div class="why-row">
       <div class="why-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l8 4v6c0 5-3.5 8-8 10-4.5-2-8-5-8-10V6z"/><path d="M9 12l2 2 4-4"/></svg>
         <h4>Verified Suppliers</h4>
         <p>Every supplier on the network is vetted for authenticity and documentation before their first listing goes live.</p>
       </div>
       <div class="why-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="4"/><path d="M4 21c0-4 4-6 8-6s8 2 8 6"/></svg>
         <h4>A Named Account Rep</h4>
         <p>One person who knows your reorder cycle and seasonal peaks — a direct line, not a shared support inbox.</p>
       </div>
       <div class="why-item">
-        <svg viewBox="0 0 24 24" fill="none" stroke="#1450e0" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="13" height="10" rx="1"/><path d="M16 11h4l1 3v4h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="#9aa1ab" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="13" height="10" rx="1"/><path d="M16 11h4l1 3v4h-5"/><circle cx="7.5" cy="18.5" r="1.5"/><circle cx="17.5" cy="18.5" r="1.5"/></svg>
         <h4>Nationwide Fulfillment</h4>
         <p>Orders route to the nearest partner warehouse and dispatch within 24 hours of confirmation.</p>
       </div>
@@ -343,6 +330,7 @@
                 <option>Kitchen Appliances</option>
                 <option>Household Electronics</option>
                 <option>Health &amp; Wellness</option>
+                <option>Toys &amp; Games</option>
               </select>
             </div>
             <div class="field full"><label for="fNotes">What are you sourcing?</label><textarea id="fNotes" rows="3"></textarea></div>
@@ -363,13 +351,14 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top"><span class="mark"></span><span class="ga">GA</span>&nbsp;<span class="mkt">MARKETPLACE</span></a>
-        <p>Wholesale sourcing and supplier connections across three categories — trade accounts only, not a consumer storefront.</p>
+        <p>Wholesale sourcing and supplier connections across four categories — trade accounts only, not a consumer storefront.</p>
       </div>
       <div class="foot-col">
         <h5>Categories</h5>
-        <a href="#categories">Kitchen Appliances</a>
-        <a href="#categories">Household Electronics</a>
-        <a href="#categories">Health &amp; Wellness</a>
+        <a href="kitchen-appliances.html">Kitchen Appliances</a>
+        <a href="household-electronics.html">Household Electronics</a>
+        <a href="health-wellness.html">Health &amp; Wellness</a>
+        <a href="toys-games.html">Toys &amp; Games</a>
       </div>
       <div class="foot-col">
         <h5>Company</h5>
@@ -390,20 +379,6 @@
   </div>
 </footer>
 
-<div class="modal-backdrop" id="modalBackdrop">
-  <div class="modal">
-    <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
-    <span class="accent"></span>
-    <h3 id="modalTitle"></h3>
-    <div class="m-meta mono" id="modalMeta"></div>
-    <p class="m-desc" id="modalDesc"></p>
-    <div class="m-subs">
-      <div class="m-subs-lbl">Subcategories</div>
-      <div class="m-sub-list" id="modalSubs"></div>
-    </div>
-  </div>
-</div>
-
 <script>
 (function(){
   var burger = document.getElementById('burgerBtn');
@@ -412,15 +387,18 @@
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
 
   var categories = [
-    { name:'Kitchen Appliances', moq:'MOQ 40 UNITS', accent:'c-blue',
+    { name:'Kitchen Appliances', moq:'MOQ 40 UNITS', accent:'c-blue', href:'kitchen-appliances.html',
       desc:'Small and countertop kitchen appliances sourced brand-direct and through authorized distribution for retailers and resellers.',
       subs:['Countertop Appliances','Cookware & Bakeware','Food Prep & Storage','Coffee & Beverage','Kitchen Electronics','Replacement Parts'] },
-    { name:'Household Electronics', moq:'MOQ 30 UNITS', accent:'c-yellow',
+    { name:'Household Electronics', moq:'MOQ 30 UNITS', accent:'c-yellow', href:'household-electronics.html',
       desc:'Smart home devices, displays, and consumer electronics sourced in bulk for retailers, resellers, and online sellers.',
       subs:['Smart Home Devices','TVs & Displays','Audio & Speakers','Chargers & Accessories','Security Devices','Small Electronics'] },
-    { name:'Health & Wellness', moq:'MOQ 50 UNITS', accent:'c-blue',
+    { name:'Health & Wellness', moq:'MOQ 50 UNITS', accent:'c-blue', href:'health-wellness.html',
       desc:'Vitamins, supplements, and wellness essentials sourced for pharmacies, gyms, health stores, and ecommerce sellers.',
-      subs:['Vitamins & Supplements','Fitness Equipment','Personal Care','Wellness Devices','First Aid','Nutrition'] }
+      subs:['Vitamins & Supplements','Fitness Equipment','Personal Care','Wellness Devices','First Aid','Nutrition'] },
+    { name:'Toys & Games', moq:'MOQ 50 UNITS', accent:'c-yellow', href:'toys-games.html',
+      desc:'Educational, outdoor, and seasonal toys sourced brand-direct and through authorized distribution for toy retailers and resellers.',
+      subs:['Educational Toys','Outdoor & Active Play','Building & Construction','Dolls & Action Figures','Games & Puzzles','Seasonal & Party'] }
   ];
 
   var catRows = document.getElementById('catRows');
@@ -428,24 +406,10 @@
     var row = document.createElement('div');
     row.className = 'cat-row';
     row.innerHTML =
-      '<div><button class="cat-row-btn"><span class="accent ' + c.accent + '"></span><h3>' + c.name + '</h3><div class="cat-meta">' + c.moq + '</div></button></div>' +
-      '<div><p class="cat-desc">' + c.desc + '</p><div class="cat-subs">' + c.subs.map(function(s){return '<span>'+s+'</span>';}).join(' · ') + '</div><button class="cat-link">View category →</button></div>';
-    row.querySelectorAll('.cat-row-btn, .cat-link').forEach(function(el){ el.addEventListener('click', function(){ openModal(c); }); });
+      '<div><a class="cat-row-btn" href="' + c.href + '"><span class="accent ' + c.accent + '"></span><h3>' + c.name + '</h3><div class="cat-meta">' + c.moq + '</div></a></div>' +
+      '<div><p class="cat-desc">' + c.desc + '</p><div class="cat-subs">' + c.subs.map(function(s){return '<span>'+s+'</span>';}).join(' · ') + '</div><a class="cat-link" href="' + c.href + '">View category →</a></div>';
     catRows.appendChild(row);
   });
-
-  var backdrop = document.getElementById('modalBackdrop');
-  function openModal(c){
-    document.getElementById('modalTitle').textContent = c.name;
-    document.getElementById('modalMeta').textContent = c.moq;
-    document.getElementById('modalDesc').textContent = c.desc;
-    document.getElementById('modalSubs').textContent = c.subs.join('  ·  ');
-    backdrop.classList.add('open');
-  }
-  function closeModal(){ backdrop.classList.remove('open'); }
-  document.getElementById('modalClose').addEventListener('click', closeModal);
-  backdrop.addEventListener('click', function(e){ if (e.target === backdrop) closeModal(); });
-  document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closeModal(); });
 
   var faqs = [
     { q:'How do I open a wholesale trade account?', a:'Submit a resale certificate or business license through the request form below. Verification and account activation typically take 24 to 48 hours, and there is no cost to apply.' },
