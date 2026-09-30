@@ -96,21 +96,25 @@
   .section-light .sec-head p, .section-soft .sec-head p{ color:var(--muted-light); }
   .section-dark .sec-head p{ color:var(--muted-dark); }
 
-  /* CATEGORY ROWS — editorial, not cards */
-  .cat-rows{ display:flex; flex-direction:column; }
-  .cat-row{ display:grid; grid-template-columns: 1.1fr 1.5fr; gap:40px; padding-block:34px; border-top:1px solid var(--line); align-items:start; }
-  .cat-row:first-child{ border-top:1px solid var(--line); }
-  .cat-row .accent{ display:inline-block; width:26px; height:3px; margin-bottom:14px; }
-  .cat-row .accent.c-blue{ background:var(--blue-bright); }
-  .cat-row .accent.c-yellow{ background:var(--yellow); }
-  .cat-row h3{ font-family:'Archivo',sans-serif; font-weight:800; font-size:1.7rem; color:var(--text-light); }
-  .cat-row .cat-meta{ margin-top:8px; font-family:'JetBrains Mono',monospace; font-size:0.76rem; color:var(--blue); }
-  .cat-row .cat-desc{ font-size:0.95rem; line-height:1.6; color:var(--muted-light); max-width:480px; }
-  .cat-row .cat-subs{ margin-top:14px; font-size:0.82rem; color:var(--faint-light); }
-  .cat-row .cat-subs span{ color:var(--muted-light); }
-  .cat-row .cat-link{ margin-top:16px; display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:var(--blue-bright); background:none; border:none; padding:0; }
-  .cat-row-btn{ display:block; width:100%; text-align:left; background:none; border:none; padding:0; cursor:pointer; }
-  .cat-row-btn:hover h3{ color:var(--blue-bright); }
+  /* CATEGORY SLIDESHOW */
+  .slideshow{ position:relative; height:520px; border-radius:6px; overflow:hidden; background:var(--surface); }
+  .slide{ position:absolute; inset:0; opacity:0; visibility:hidden; transition:opacity .7s ease; }
+  .slide.active{ opacity:1; visibility:visible; z-index:2; }
+  .slide img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .slide-scrim{ position:absolute; inset:0; background:linear-gradient(0deg, rgba(0,0,0,0.88) 0%, rgba(0,0,0,0.35) 45%, rgba(0,0,0,0.05) 70%); }
+  .slide-link{ position:absolute; inset:0; z-index:1; }
+  .slide-content{ position:absolute; left:0; right:0; bottom:0; z-index:3; padding:40px 44px; pointer-events:none; }
+  .slide-index{ font-family:'JetBrains Mono',monospace; font-size:0.74rem; letter-spacing:0.1em; color:var(--muted-dark); }
+  .slide-name{ margin-top:10px; font-family:'Archivo',sans-serif; font-weight:900; font-size:clamp(1.8rem,3.6vw,2.6rem); color:#fff; }
+  .slide-desc{ margin-top:10px; font-size:0.94rem; line-height:1.55; color:rgba(255,255,255,0.78); max-width:460px; }
+  .slide-cta{ margin-top:16px; display:inline-flex; align-items:center; gap:6px; font-size:0.78rem; font-weight:700; letter-spacing:0.04em; text-transform:uppercase; color:#fff; }
+  .slide-dots{ position:absolute; right:24px; bottom:24px; z-index:4; display:flex; gap:10px; }
+  .slide-dot{ width:9px; height:9px; border-radius:50%; background:rgba(255,255,255,0.35); border:1.5px solid transparent; padding:0; cursor:pointer; transition:background .2s ease, transform .2s ease; }
+  .slide-dot.active{ background:#fff; transform:scale(1.2); }
+  @media (max-width:620px){
+    .slideshow{ height:380px; }
+    .slide-content{ padding:26px 22px; }
+  }
 
   /* WHY GA MARKETPLACE — plain three-up, no card boxes */
   .why-row{ display:grid; grid-template-columns:repeat(3,1fr); gap:0; }
@@ -204,7 +208,7 @@
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
         +1 (786) 622-3740
       </a>
-      <a class="btn btn-primary" href="#apply">Get Wholesale Access</a>
+      <a class="btn btn-primary" href="#apply">Request a Quote</a>
       <button class="burger" id="burgerBtn" aria-label="Menu"><span></span><span></span><span></span></button>
     </div>
   </div>
@@ -221,7 +225,7 @@
 <section class="hero">
   <div class="wrap">
     <div class="hero-top">
-      <div class="hero-badge"><span class="dot"></span><span class="eyebrow">Trade Accounts Only · Verified Suppliers</span></div>
+      <div class="hero-badge"><span class="dot"></span><span class="eyebrow">Verified Suppliers · Nationwide Fulfillment</span></div>
       <h1 class="hero-h1 display">Source smarter.<br>Stock <em>faster.</em></h1>
       <p class="hero-sub">GA Marketplace connects retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, health &amp; wellness, and toys &amp; games.</p>
       <div class="hero-ctas">
@@ -235,36 +239,36 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Our Product Categories</span>
-      <h2>Four categories. One trade account.</h2>
-      <p>Every category is sourced through vetted, authorized suppliers. Select a line for subcategories and typical order volumes.</p>
+      <h2>Four categories. One quote.</h2>
+      <p>Every category is sourced through vetted, authorized suppliers. Select a line to see subcategories, examples, and typical order volumes.</p>
     </div>
-    <div class="cat-rows" id="catRows"></div>
+    <div class="slideshow" id="catSlideshow"></div>
   </div>
 </section>
 
 <section id="how">
   <div class="wrap">
     <div class="sec-head">
-      <span class="eyebrow">How Sourcing Works</span>
-      <h2>From application to reorder, in three steps.</h2>
+      <span class="eyebrow">How It Works</span>
+      <h2>From quote to delivery, in three steps.</h2>
     </div>
   </div>
   <div class="wrap" style="padding-inline:24px;">
     <div class="steps-row">
       <div class="step-item">
         <div class="step-num mono">01</div>
-        <h4>Apply for a Trade Account</h4>
-        <p>Submit your resale certificate or business license — no cost, most accounts verified within 48 hours.</p>
+        <h4>Request a Quote</h4>
+        <p>Tell us what you need and how much — no cost, most quotes returned within 48 hours.</p>
       </div>
       <div class="step-item">
         <div class="step-num mono">02</div>
-        <h4>Browse Verified Suppliers</h4>
+        <h4>We Source It</h4>
         <p>Real, documented inventory across kitchen appliances, household electronics, health &amp; wellness, and toys &amp; games.</p>
       </div>
       <div class="step-item">
         <div class="step-num mono">03</div>
-        <h4>Ship &amp; Reorder</h4>
-        <p>Your account rep handles fulfillment and reorders, so your shelves and listings stay stocked.</p>
+        <h4>We Ship It</h4>
+        <p>Our fulfillment network handles logistics and delivery, so your order arrives on schedule.</p>
       </div>
     </div>
   </div>
@@ -300,7 +304,7 @@
   <div class="wrap">
     <div class="sec-head">
       <span class="eyebrow">Common Questions</span>
-      <h2>Before you apply.</h2>
+      <h2>Questions about GA Marketplace.</h2>
     </div>
     <div class="faq-list" id="faqList"></div>
   </div>
@@ -310,8 +314,8 @@
   <div class="wrap">
     <div class="cta-grid">
       <div class="cta-left">
-        <h2 class="display">Ready to open a trade account?</h2>
-        <p>Tell us what you're sourcing and your expected order volume. Our wholesale desk replies within one business day.</p>
+        <h2 class="display">Contact Us</h2>
+        <p>Tell us what you're sourcing and how much you need. We reply with a quote within one business day.</p>
         <div class="cta-contacts">
           <a href="tel:+17866223740">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.127.96.362 1.903.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
@@ -322,7 +326,7 @@
             Fabucha66@hotmail.com
           </a>
         </div>
-        <p class="cta-note">GA Marketplace sells to businesses only. A resale certificate or business license is required before an account is activated.</p>
+        <p class="cta-note">We typically reply with pricing and next steps within one business day.</p>
       </div>
 
       <div class="form-card">
@@ -342,11 +346,11 @@
             </div>
             <div class="field full"><label for="fNotes">What are you sourcing?</label><textarea id="fNotes" rows="3"></textarea></div>
           </div>
-          <button type="submit" class="btn btn-gold form-submit">Request Trade Account</button>
+          <button type="submit" class="btn btn-gold form-submit">Request a Quote</button>
         </form>
         <div class="form-success" id="formSuccess">
           <div class="num display">Request received.</div>
-          <p style="color:var(--muted-dark); font-size:0.88rem;">Our wholesale desk will reach out within one business day.</p>
+          <p style="color:var(--muted-dark); font-size:0.88rem;">Our team will reach out within one business day.</p>
         </div>
       </div>
     </div>
@@ -358,7 +362,7 @@
     <div class="foot-grid">
       <div class="foot-brand">
         <a class="brand" href="#top"><span class="mark"></span><span class="ga">GA</span>&nbsp;<span class="mkt">MARKETPLACE</span></a>
-        <p>Wholesale sourcing and supplier connections across four categories — trade accounts only, not a consumer storefront.</p>
+        <p>Wholesale sourcing and supplier connections across four categories.</p>
       </div>
       <div class="foot-col">
         <h5>Categories</h5>
@@ -371,17 +375,17 @@
         <h5>Company</h5>
         <a href="#how">How It Works</a>
         <a href="#faq">FAQ</a>
-        <a href="#apply">Apply</a>
+        <a href="#apply">Contact</a>
       </div>
       <div class="foot-col">
-        <h5>Wholesale Desk</h5>
+        <h5>Contact</h5>
         <a href="tel:+17866223740">+1 (786) 622-3740</a>
         <a href="mailto:Fabucha66@hotmail.com">Fabucha66@hotmail.com</a>
       </div>
     </div>
     <div class="foot-bottom">
       <span>© 2026 GA Marketplace. All rights reserved.</span>
-      <span class="mono">TRADE ACCOUNTS ONLY · RESALE CERTIFICATE REQUIRED</span>
+      <span class="mono">VERIFIED SUPPLIERS · NATIONWIDE FULFILLMENT</span>
     </div>
   </div>
 </footer>
@@ -394,36 +398,70 @@
   menu.querySelectorAll('a').forEach(function(a){ a.addEventListener('click', function(){ menu.classList.remove('open'); }); });
 
   var categories = [
-    { name:'Kitchen Appliances', moq:'MOQ 40 UNITS', accent:'c-blue', href:'kitchen-appliances.html',
-      desc:'Small and countertop kitchen appliances sourced brand-direct and through authorized distribution for retailers and resellers.',
-      subs:['Countertop Appliances','Cookware & Bakeware','Food Prep & Storage','Coffee & Beverage','Kitchen Electronics','Replacement Parts'] },
-    { name:'Household Electronics', moq:'MOQ 30 UNITS', accent:'c-yellow', href:'household-electronics.html',
-      desc:'Smart home devices, displays, and consumer electronics sourced in bulk for retailers, resellers, and online sellers.',
-      subs:['Smart Home Devices','TVs & Displays','Audio & Speakers','Chargers & Accessories','Security Devices','Small Electronics'] },
-    { name:'Health & Wellness', moq:'MOQ 50 UNITS', accent:'c-blue', href:'health-wellness.html',
-      desc:'Vitamins, supplements, and wellness essentials sourced for pharmacies, gyms, health stores, and ecommerce sellers.',
-      subs:['Vitamins & Supplements','Fitness Equipment','Personal Care','Wellness Devices','First Aid','Nutrition'] },
-    { name:'Toys & Games', moq:'MOQ 50 UNITS', accent:'c-yellow', href:'toys-games.html',
-      desc:'Educational, outdoor, and seasonal toys sourced brand-direct and through authorized distribution for toy retailers and resellers.',
-      subs:['Educational Toys','Outdoor & Active Play','Building & Construction','Dolls & Action Figures','Games & Puzzles','Seasonal & Party'] }
+    { name:'Kitchen Appliances', href:'kitchen-appliances.html', img:'images/kitchen-appliances.jpg',
+      desc:'Small and countertop kitchen appliances sourced brand-direct and through authorized distribution.' },
+    { name:'Household Electronics', href:'household-electronics.html', img:'images/household-electronics.jpg',
+      desc:'Smart home devices, displays, and consumer electronics sourced in bulk for retailers and resellers.' },
+    { name:'Health & Wellness', href:'health-wellness.html', img:'images/health-wellness.jpg',
+      desc:'Vitamins, supplements, and wellness essentials sourced for pharmacies, gyms, and health stores.' },
+    { name:'Toys & Games', href:'toys-games.html', img:'images/toys-games.jpg',
+      desc:'Educational, outdoor, and seasonal toys sourced brand-direct for toy retailers and resellers.' }
   ];
 
-  var catRows = document.getElementById('catRows');
-  categories.forEach(function(c){
-    var row = document.createElement('div');
-    row.className = 'cat-row';
-    row.innerHTML =
-      '<div><a class="cat-row-btn" href="' + c.href + '"><span class="accent ' + c.accent + '"></span><h3>' + c.name + '</h3><div class="cat-meta">' + c.moq + '</div></a></div>' +
-      '<div><p class="cat-desc">' + c.desc + '</p><div class="cat-subs">' + c.subs.map(function(s){return '<span>'+s+'</span>';}).join(' · ') + '</div><a class="cat-link" href="' + c.href + '">View category →</a></div>';
-    catRows.appendChild(row);
+  var slideshow = document.getElementById('catSlideshow');
+  categories.forEach(function(c, i){
+    var slide = document.createElement('div');
+    slide.className = 'slide' + (i === 0 ? ' active' : '');
+    slide.innerHTML =
+      '<img src="' + c.img + '" alt="' + c.name + '" loading="' + (i === 0 ? 'eager' : 'lazy') + '">' +
+      '<div class="slide-scrim"></div>' +
+      '<a class="slide-link" href="' + c.href + '" aria-label="View ' + c.name + '"></a>' +
+      '<div class="slide-content">' +
+        '<div class="slide-index mono">' + (i+1) + ' / ' + categories.length + '</div>' +
+        '<div class="slide-name display">' + c.name + '</div>' +
+        '<p class="slide-desc">' + c.desc + '</p>' +
+        '<span class="slide-cta">View category →</span>' +
+      '</div>';
+    slideshow.appendChild(slide);
   });
 
+  var dotsWrap = document.createElement('div');
+  dotsWrap.className = 'slide-dots';
+  categories.forEach(function(c, i){
+    var dot = document.createElement('button');
+    dot.className = 'slide-dot' + (i === 0 ? ' active' : '');
+    dot.setAttribute('aria-label', 'Show ' + c.name);
+    dot.addEventListener('click', function(){ goToSlide(i); });
+    dotsWrap.appendChild(dot);
+  });
+  slideshow.appendChild(dotsWrap);
+
+  var slideEls = slideshow.querySelectorAll('.slide');
+  var dotEls = dotsWrap.querySelectorAll('.slide-dot');
+  var activeSlide = 0;
+  var slideTimer;
+  function goToSlide(i){
+    slideEls[activeSlide].classList.remove('active');
+    dotEls[activeSlide].classList.remove('active');
+    activeSlide = i;
+    slideEls[activeSlide].classList.add('active');
+    dotEls[activeSlide].classList.add('active');
+  }
+  function nextSlide(){ goToSlide((activeSlide + 1) % categories.length); }
+  var reduceMotion = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (!reduceMotion){
+    slideTimer = setInterval(nextSlide, 4500);
+    slideshow.addEventListener('mouseenter', function(){ clearInterval(slideTimer); });
+    slideshow.addEventListener('mouseleave', function(){ slideTimer = setInterval(nextSlide, 4500); });
+  }
+
   var faqs = [
-    { q:'How do I open a wholesale trade account?', a:'Submit a resale certificate or business license through the request form below. Verification and account activation typically take 24 to 48 hours, and there is no cost to apply.' },
-    { q:'What are your minimum order quantities?', a:'MOQs are set per category, generally between 30 and 50 units. Larger orders are quoted per pallet, and your account rep can walk through volume specifics for your category.' },
+    { q:'What does GA Marketplace do?', a:'We connect retailers, resellers, and ecommerce businesses with verified wholesale suppliers across kitchen appliances, household electronics, health & wellness, and toys & games, then handle the logistics of getting products to you.' },
+    { q:'How do I request a quote?', a:'Fill out the form below with what you’re sourcing and how much you need. We reply with pricing and next steps within one business day.' },
+    { q:'What are your minimum order quantities?', a:'MOQs are set per category, generally between 30 and 50 units. Larger orders are quoted per pallet — your quote will include the specifics for what you’re sourcing.' },
     { q:'Are the products authentic and supplier-verified?', a:'Yes. Every supplier on the network is vetted for authenticity and sourcing documentation before listing, and invoices are available on request for any order.' },
-    { q:'Do you support drop-shipping to end customers?', a:'Yes, for approved trade accounts, with blind packing slips and integration support for common ecommerce platforms.' },
-    { q:'How fast do orders ship?', a:'Standard orders dispatch within 24 hours of confirmation from the nearest partner warehouse in our fulfillment network.' }
+    { q:'How does shipping and fulfillment work?', a:'Once your order is confirmed, it routes through our fulfillment network and dispatches within 24 hours from the nearest partner warehouse.' },
+    { q:'How do I get in touch?', a:'Call or email us directly using the contact details below, or send a request through the form and we’ll reach out to you.' }
   ];
   var faqList = document.getElementById('faqList');
   faqs.forEach(function(f){
