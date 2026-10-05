@@ -191,6 +191,28 @@
   .brand-logo{ display:block; height:68px; width:auto; }
   footer .brand-logo{ height:84px; }
   @media (max-width:620px){ .brand-logo{ height:52px; } footer .brand-logo{ height:68px; } }
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns:0.9fr 1.4fr; gap:56px; align-items:start; }
+  .about-grid .eyebrow{ display:block; margin-bottom:12px; }
+  .about-grid h2{ font-size:clamp(1.8rem,3.2vw,2.5rem); font-weight:800; color:var(--text-light); }
+  .about-body p{ font-size:1.05rem; line-height:1.7; color:var(--muted-light); max-width:620px; }
+  .about-body .about-goal{ margin-top:26px; padding-left:20px; border-left:3px solid var(--yellow); font-family:'Archivo',sans-serif; font-weight:800; font-size:clamp(1.15rem,2vw,1.4rem); line-height:1.35; color:var(--text-light); max-width:560px; }
+  /* RFQ FORM */
+  .form-head{ margin-bottom:22px; }
+  .form-head .t{ display:flex; align-items:center; gap:10px; font-family:'Archivo',sans-serif; font-weight:800; font-size:1.25rem; color:var(--text-dark); }
+  .form-head .t .mono{ font-size:0.66rem; letter-spacing:0.14em; padding:3px 7px; border:1px solid var(--line); border-radius:3px; color:var(--muted-dark); font-weight:600; }
+  .form-head .s{ margin-top:6px; font-size:0.86rem; color:var(--muted-dark); }
+  .field label .opt{ text-transform:none; letter-spacing:0; color:var(--faint-dark); }
+  .form-row{ grid-template-columns:repeat(6,1fr); align-items:end; }
+  .field{ grid-column:span 3; }
+  .field.third{ grid-column:span 2; }
+  .field.full{ grid-column:1/-1; }
+  /* FOOTER LEGAL */
+  .legal-links{ display:flex; flex-wrap:wrap; gap:6px 22px; }
+  .legal-links a{ color:var(--muted-dark); font-size:0.78rem; }
+  .legal-links a:hover{ color:var(--yellow); }
+  @media (max-width:980px){ .about-grid{ grid-template-columns:1fr; gap:20px; } }
+  @media (max-width:620px){ .form-row{ grid-template-columns:1fr; } .field, .field.third{ grid-column:1/-1; } }
 </style>
 </head>
 <body>
@@ -200,6 +222,7 @@
     <a class="brand" href="#top"><img class="brand-logo" src="images/logo.webp" alt="GA Marketplace"></a>
     <nav class="navlinks">
       <a href="#categories">Categories</a>
+      <a href="#about">About</a>
       <a href="#how">How It Works</a>
       <a href="#faq">FAQ</a>
     </nav>
@@ -214,6 +237,7 @@
   </div>
   <div class="mobile-menu" id="mobileMenu">
     <a href="#categories">Categories</a>
+    <a href="#about">About</a>
     <a href="#how">How It Works</a>
     <a href="#faq">FAQ</a>
     <a href="tel:+17866223740">+1 (786) 622-3740</a>
@@ -243,6 +267,21 @@
       <p>Every category is sourced through vetted, authorized suppliers. Select a line to see subcategories, examples, and typical order volumes.</p>
     </div>
     <div class="slideshow" id="catSlideshow"></div>
+  </div>
+</section>
+
+<section class="section-soft" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+      <div>
+        <span class="eyebrow">Who We Are</span>
+        <h2>About GA Marketplace</h2>
+      </div>
+      <div class="about-body">
+        <p>GA Marketplace is a Miami, Florida-based wholesale sourcing company serving businesses nationwide. We help retailers, resellers, and e-commerce businesses source quality products across multiple categories through a simple and reliable purchasing process.</p>
+        <p class="about-goal">Our goal is simple: make wholesale sourcing easier, faster, and more efficient.</p>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -330,26 +369,26 @@
       </div>
 
       <div class="form-card">
+        <div class="form-head">
+          <div class="t">Request for Quote <span class="mono">RFQ</span></div>
+          <p class="s">Tell us what you need and we&rsquo;ll reply within one business day.</p>
+        </div>
         <form id="tradeForm">
           <div class="form-row">
-            <div class="field"><label for="fName">Your Name</label><input id="fName" type="text" required></div>
-            <div class="field"><label for="fCompany">Company</label><input id="fCompany" type="text" required></div>
-            <div class="field"><label for="fEmail">Work Email</label><input id="fEmail" type="email" required></div>
-            <div class="field"><label for="fPhone">Phone</label><input id="fPhone" type="tel"></div>
-            <div class="field full"><label for="fCategory">Primary Category</label>
-              <select id="fCategory">
-                <option>Kitchen Appliances</option>
-                <option>Household Electronics</option>
-                <option>Health &amp; Wellness</option>
-                <option>Toys &amp; Games</option>
-              </select>
-            </div>
-            <div class="field full"><label for="fNotes">What are you sourcing?</label><textarea id="fNotes" rows="3"></textarea></div>
+            <div class="field"><label for="fName">Name</label><input id="fName" name="name" type="text" autocomplete="name" required></div>
+            <div class="field"><label for="fCompany">Company</label><input id="fCompany" name="company" type="text" autocomplete="organization" required></div>
+            <div class="field"><label for="fEmail">Business Email</label><input id="fEmail" name="email" type="email" autocomplete="email" required></div>
+            <div class="field"><label for="fPhone">Phone</label><input id="fPhone" name="phone" type="tel" autocomplete="tel" required></div>
+            <div class="field full"><label for="fProduct">Product / Brand Requested</label><input id="fProduct" name="product" type="text" required></div>
+            <div class="field third"><label for="fQty">Estimated Quantity</label><input id="fQty" name="quantity" type="number" min="1" step="1" inputmode="numeric" required></div>
+            <div class="field third"><label for="fZip">Ship-to ZIP Code</label><input id="fZip" name="zip" type="text" inputmode="numeric" autocomplete="postal-code" pattern="[0-9]{5}(-[0-9]{4})?" maxlength="10" required></div>
+            <div class="field third"><label for="fPrice">Target Price <span class="opt">(optional)</span></label><input id="fPrice" name="target_price" type="text" inputmode="decimal" placeholder="$ per unit"></div>
+            <div class="field full"><label for="fNotes">Additional Details <span class="opt">(optional)</span></label><textarea id="fNotes" name="details" rows="3"></textarea></div>
           </div>
-          <button type="submit" class="btn btn-gold form-submit">Request a Quote</button>
+          <button type="submit" class="btn btn-gold form-submit">Submit RFQ</button>
         </form>
         <div class="form-success" id="formSuccess">
-          <div class="num display">Request received.</div>
+          <div class="num display">RFQ received.</div>
           <p style="color:var(--muted-dark); font-size:0.88rem;">Our team will reach out within one business day.</p>
         </div>
       </div>
@@ -373,9 +412,9 @@
       </div>
       <div class="foot-col">
         <h5>Company</h5>
+        <a href="#about">About Us</a>
         <a href="#how">How It Works</a>
         <a href="#faq">FAQ</a>
-        <a href="#apply">Contact</a>
       </div>
       <div class="foot-col">
         <h5>Contact</h5>
@@ -385,7 +424,13 @@
     </div>
     <div class="foot-bottom">
       <span>© 2026 GA Marketplace. All rights reserved.</span>
-      <span class="mono">VERIFIED SUPPLIERS · NATIONWIDE FULFILLMENT</span>
+      <nav class="legal-links" aria-label="Footer">
+        <a href="#about">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+        <a href="shipping-returns.html">Shipping &amp; Returns</a>
+        <a href="#apply">Contact</a>
+      </nav>
     </div>
   </div>
 </footer>

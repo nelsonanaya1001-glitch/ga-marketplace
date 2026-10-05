@@ -95,6 +95,11 @@
   .brand-logo{ display:block; height:68px; width:auto; }
   footer .brand-logo{ height:84px; }
   @media (max-width:620px){ .brand-logo{ height:52px; } footer .brand-logo{ height:68px; } }
+  /* FOOTER LEGAL */
+  .foot-legal{ margin-top:28px; padding-top:20px; border-top:1px solid var(--line); display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:12px; font-size:0.76rem; color:var(--faint-dark); }
+  .legal-links{ display:flex; flex-wrap:wrap; gap:6px 22px; }
+  .legal-links a{ color:var(--muted-dark); font-size:0.78rem; }
+  .legal-links a:hover{ color:var(--yellow); }
 </style>
 </head>
 <body>
@@ -191,13 +196,25 @@
 </section>
 
 <footer>
-  <div class="wrap foot-row">
+  <div class="wrap">
+    <div class="foot-row">
     <a class="brand" href="index.html"><img class="brand-logo" src="images/logo.webp" alt="GA Marketplace"></a>
     <div class="foot-links">
       <a href="kitchen-appliances.html">Kitchen Appliances</a>
       <a href="household-electronics.html">Household Electronics</a>
       <a href="toys-games.html">Toys &amp; Games</a>
       <a href="tel:+17866223740">+1 (786) 622-3740</a>
+    </div>
+  </div>
+    <div class="foot-legal">
+      <span>© 2026 GA Marketplace. All rights reserved.</span>
+      <nav class="legal-links" aria-label="Footer">
+        <a href="index.html#about">About Us</a>
+        <a href="privacy-policy.html">Privacy Policy</a>
+        <a href="terms-conditions.html">Terms &amp; Conditions</a>
+        <a href="shipping-returns.html">Shipping &amp; Returns</a>
+        <a href="index.html#apply">Contact</a>
+      </nav>
     </div>
   </div>
 </footer>
